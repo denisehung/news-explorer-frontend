@@ -2,8 +2,7 @@
 
 .footer {
   font-family: 'Roboto';
-  padding-left: 104px;
-  padding-right: 104px;
+  padding: 32px 104px 26px 104px;
 }
 
 .footer__content {
@@ -12,7 +11,10 @@
 }
 
 .footer__copyright {
+  font-size: 16px;
+  line-height: 22px;
   color: #B6BCBF;
+  margin: 0;
 }
 
 .footer__nav {
@@ -24,18 +26,38 @@
 }
 
 .footer__link {
+  color: #1A1B22;
+  font-size: 18px;
+  line-height: 24px;
   margin-left: 40px;
+  align-self: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.footer__link:hover {
+  opacity: 0.6;
 }
 
 .footer__social {
   display: flex;
 }
 
-.footer__github-icon {
+.footer__icon {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.footer__icon:hover {
+  opacity: 0.6;
+}
+
+.footer__icon_type_github {
   margin-left: 40px;
 }
 
-.footer__facebook-icon {
+.footer__icon_type_facebook {
   margin-left: 24px;
 }
 
@@ -45,13 +67,17 @@
     padding-right: 40px;
   }
 
+  .footer__link {
+    margin-left: 24px;
+  }
+
+  .footer__icon_type_github {
+    margin-left: 24px;
+  }
+
 }
 
-@media screen and (max-width: 540px) {
-  .footer {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+@media screen and (max-width: 740px) {
 
   .footer__content {
     flex-direction: column-reverse;
@@ -66,6 +92,7 @@
   }
 
   .footer__link {
+    align-self: auto;
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 30px;
@@ -73,6 +100,14 @@
 
   .footer__social {
     align-items: flex-start;
+  }
+
+}
+
+@media screen and (max-width: 540px) {
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
 }

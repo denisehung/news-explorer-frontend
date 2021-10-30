@@ -10,12 +10,12 @@ export default function Footer() {
         <p className="footer__copyright">© 2021 Supersite, Powered by News API</p>
         <div className="footer__nav">
           <div className="footer__links">
-            <p className="footer__link">Home</p>
-            <p className="footer__link">Practicum by Yandex</p>
+            <a href="#home" className="footer__link">Home</a>
+            <a href="https://practicum.yandex.com/profile/web/" className="footer__link">Practicum by Yandex</a>
           </div>
           <div className="footer__social">
-            <img src={GithubIcon} alt='Github icon' className="footer__github-icon"/>
-            <img src={FacebookIcon} alt='Facebook icon' className="footer__facebook-icon"/>
+            <img src={GithubIcon} alt='Github icon' className="footer__icon footer__icon_type_github"/>
+            <img src={FacebookIcon} alt='Facebook icon' className="footer__icon footer__icon_type_facebook"/>
           </div>
         </div>
       </div>

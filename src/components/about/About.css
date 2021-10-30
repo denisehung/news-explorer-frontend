@@ -24,12 +24,14 @@
 
 .about__header {
   font-family: 'Roboto Slab';
+  font-weight: 400;
   font-size: 40px;
   margin: 0;
 }
 
 .about__paragraph {
   font-family: 'Roboto';
+  font-weight: 400;
   margin-top: 16px;
   font-size: 18px;
   line-height: 24px;
@@ -41,7 +43,6 @@
     padding-top: 80px;
     padding-bottom: 61px;
   }
-
 }
 
 @media screen and (max-width: 768px) {
@@ -59,7 +60,6 @@
     margin-left: 32px;
     padding-top: 40px;
   }
-
 }
 
 @media screen and (max-width: 570px) {
