@@ -1,8 +1,17 @@
-import "./App.css";
-import SearchHero from "./components/search-hero/SearchHero";
+import React from 'react';
+import './App.css';
+import Header from './components/header/Header';
+import SearchHero from './components/search-hero/SearchHero';
 
 function App() {
-  return <SearchHero />;
+  const [loggedIn, setLogged] = React.useState(true);
+
+  return (
+    <>
+      <Header loggedIn={loggedIn} />
+      <SearchHero />
+    </>
+  );
 }
 
 export default App;
