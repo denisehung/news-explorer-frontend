@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap');
+
+.footer {
+  font-family: 'Roboto';
+  padding-left: 104px;
+  padding-right: 104px;
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__copyright {
+  color: #B6BCBF;
+}
+
+.footer__nav {
+  display: flex;
+}
+
+.footer__links {
+  display: flex;
+}
+
+.footer__link {
+  margin-left: 40px;
+}
+
+.footer__social {
+  display: flex;
+}
+
+.footer__github-icon {
+  margin-left: 40px;
+}
+
+.footer__facebook-icon {
+  margin-left: 24px;
+}
+
+@media screen and (max-width: 1024px) {
+  .footer {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+}
+
+@media screen and (max-width: 540px) {
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .footer__content {
+    flex-direction: column-reverse;
+  }
+
+  .footer__nav {
+    justify-content: space-between;
+  }
+
+  .footer__links {
+    flex-direction: column;
+  }
+
+  .footer__link {
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+
+  .footer__social {
+    align-items: flex-start;
+  }
+
+}
