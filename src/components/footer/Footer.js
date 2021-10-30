@@ -3,7 +3,7 @@ import './Footer.css';
 import FacebookIcon from '../../images/facebook-icon.svg';
 import GithubIcon from '../../images/github-icon.svg';
 
-export default function Footer() {
+function Footer() {
   return (
     <section className="footer">
       <div className="footer__content">
@@ -22,3 +22,5 @@ export default function Footer() {
     </section>
   )
 }
+
+export default Footer;
