@@ -68,6 +68,10 @@
     outline: none;
 }
 
+::placeholder {
+    color: #B6BCBF;
+}
+
 .search-hero__button {
     margin-left: -168px;
     width: 168px;
