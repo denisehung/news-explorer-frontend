@@ -2,7 +2,7 @@ import React from 'react';
 import './About.css';
 import AuthorImage from '../../images/author-image.jpg';
 
-export default function About() {
+function About() {
   return (
     <section className="about">
       <img src={AuthorImage} alt="avatar" className="about__image" />
@@ -14,3 +14,5 @@ export default function About() {
     </section>
   )
 }
+
+export default About;
