@@ -6,7 +6,7 @@ import MenuHamburgerIcon from '../../images/menu-hamburger-icon.svg';
 import MenuCloseIcon from '../../images/menu-close-icon.svg';
 import MenuLogoutIconWhite from '../../images/menu-logout-icon_type_white.svg';
 
-function Header({ loggedIn, setLoggedIn }) {
+function Header({ loggedIn, setLoggedIn, onSignInClick }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [mobileWidth, setMobileWidth] = React.useState(false);
 
@@ -127,7 +127,7 @@ function Header({ loggedIn, setLoggedIn }) {
               'header__log-button header__signin-button header__log-button_logged-out'
             }
             to=''
-            onClick={logIn}
+            onClick={onSignInClick}
           >
             Sign In
           </NavLink>
