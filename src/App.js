@@ -4,11 +4,11 @@ import Header from './components/header/Header';
 import SearchHero from './components/search-hero/SearchHero';
 
 function App() {
-  const [loggedIn, setLogged] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <SearchHero />
     </>
   );

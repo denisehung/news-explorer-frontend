@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css';
+import MobileNavigationWrapper from '../mobile-navigation-wrapper/MobileNavigationWrapper';
 import MenuHamburgerIcon from '../../images/menu-hamburger-icon.svg';
 import MenuCloseIcon from '../../images/menu-close-icon.svg';
+import MenuLogoutIconWhite from '../../images/menu-logout-icon_type_white.svg';
 
-function Header(props) {
+function Header({ loggedIn, setLoggedIn }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [mobileWidth, setMobileWidth] = React.useState(false);
-
 
   React.useState(() => {
     function checkWidth() {
@@ -25,11 +26,22 @@ function Header(props) {
 
   function onNavClick() {
     setIsMenuOpen(!isMenuOpen);
-    console.log(isMenuOpen);
   }
 
-  return (
-    <header className={`header ${isMenuOpen ? 'header_mobile-menu-open' : 'header_mobile-menu-closed'}`}>
+  function logIn() {
+    setLoggedIn(true)
+  };
+
+  function logOut() {
+    setLoggedIn(false);
+  }
+
+  return loggedIn ? (
+    <header
+      className={`header ${
+        isMenuOpen ? 'header_mobile-menu-open' : 'header_mobile-menu-closed'
+      }`}
+    >
       <NavLink className='header__logo' exact to='/'>
         NewsExplorer
       </NavLink>
@@ -39,34 +51,87 @@ function Header(props) {
         src={isMenuOpen ? MenuCloseIcon : MenuHamburgerIcon}
         onClick={onNavClick}
       />
-      <div className={`header__navigation ${ mobileWidth && isMenuOpen ?  'header__navigation_type_mobile-active-logged-out' : 'header__navigation_type_mobile-inactive-logged-out'}`}>
-        <NavLink
-          className='header__home-link'
-          activeClassName='header__active_color_white'
-          exact
-          to='/'
-        >
-          Home
-        </NavLink>
-        {props.loggedIn && (
+      <div
+        className={`header__navigation ${
+          mobileWidth && isMenuOpen
+            ? 'header__navigation_type_mobile-active-logged-in'
+            : 'header__navigation_type_mobile-inactive'
+        }`}
+      >
+        <MobileNavigationWrapper mobileWidth={mobileWidth}>
           <NavLink
-            className='header__saved-articles-link'
+            className='header__link-home'
+            activeClassName='header__active_color_white'
+            exact
+            to='/'
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className='header__link-saved-articles'
             activeClassName='header__active_color_white'
             to='/saved-articles'
           >
             Saved articles
           </NavLink>
-        )}
-        <NavLink
-          className={`header__log-button ${
-            props.loggedIn
-              ? 'header__signout-button header__log-button_logged-in'
-              : 'header__signin-button'
-          }`}
-          to=''
-        >
-          Sign In
-        </NavLink>
+          <NavLink
+            className={
+              'header__log-button header__signout-button header__log-button_logged-in'
+            }
+            to=''
+            onClick={logOut}
+          >
+            <p className='header__log-button-username'>Colin</p>
+            <img
+              className='header__log-button-logout-icon'
+              src={MenuLogoutIconWhite}
+              alt=''
+            />
+          </NavLink>
+        </MobileNavigationWrapper>
+      </div>
+    </header>
+  ) : (
+    <header
+      className={`header ${
+        isMenuOpen ? 'header_mobile-menu-open' : 'header_mobile-menu-closed'
+      }`}
+    >
+      <NavLink className='header__logo' exact to='/'>
+        NewsExplorer
+      </NavLink>
+      <img
+        className='header__menu-icon'
+        alt='menu icon'
+        src={isMenuOpen ? MenuCloseIcon : MenuHamburgerIcon}
+        onClick={onNavClick}
+      />
+      <div
+        className={`header__navigation ${
+          mobileWidth && isMenuOpen
+            ? 'header__navigation_type_mobile-active-logged-out'
+            : 'header__navigation_type_mobile-inactive'
+        }`}
+      >
+        <MobileNavigationWrapper mobileWidth={mobileWidth}>
+          <NavLink
+            className='header__link-home'
+            activeClassName='header__active_color_white'
+            exact
+            to='/'
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={
+              'header__log-button header__signin-button header__log-button_logged-out'
+            }
+            to=''
+            onClick={logIn}
+          >
+            Sign In
+          </NavLink>
+        </MobileNavigationWrapper>
       </div>
     </header>
   );
