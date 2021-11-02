@@ -6,12 +6,13 @@ import About from './components/about/About';
 import Footer from './components/footer/Footer';
 import SignIn from './components/signIn/SignIn';
 import SignUp from './components/signUp/SignUp';
-// import SuccessPopup from './components/successPopup/SuccessPopup';
+import SuccessPopup from './components/successPopup/SuccessPopup';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
 
   // Close popup with Escape button
   useEffect(() => {
@@ -24,9 +25,21 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape)
   }, []);
 
+  function handleLogIn() {
+    setLoggedIn(true);
+    setIsSignInOpen(false);
+  }
+
+  function handleRegister() {
+    setIsSignUpOpen(false);
+    setIsSuccessPopupOpen(true);
+
+  }
+
   function handleSignInClick() {
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
+    setIsSuccessPopupOpen(false);
   }
 
   function handleSignUpClick() {
@@ -37,6 +50,7 @@ function App() {
   function closeAllPopups() {
     setIsSignInOpen(false);
     setIsSignUpOpen(false);
+    setIsSuccessPopupOpen(false);
   }
 
   return (
@@ -52,10 +66,17 @@ function App() {
       <SignIn 
         isOpen={isSignInOpen}
         onClose={closeAllPopups}
-        onSignUpClick={handleSignUpClick} 
+        onSignUpClick={handleSignUpClick}
+        onLogInSubmit={handleLogIn}
       />
       <SignUp
         isOpen={isSignUpOpen}
+        onClose={closeAllPopups}
+        onSignInClick={handleSignInClick}
+        onRegisterSubmit={handleRegister}
+      />
+      <SuccessPopup
+        isOpen={isSuccessPopupOpen}
         onClose={closeAllPopups}
         onSignInClick={handleSignInClick}
       />
