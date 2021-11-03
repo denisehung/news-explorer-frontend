@@ -10,6 +10,7 @@ import SignUp from './components/signUp/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 // import SuccessPopup from './components/successPopup/SuccessPopup';
+import SuccessPopup from './components/successPopup/SuccessPopup';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -18,7 +19,7 @@ function App() {
   const [searchKeyword, setSearchKeyword] = useState([]);
   const [isNewsCardListOpen, setIsNewsCardListOpen] = useState(false);
   const [onSavedArticlesPage, setOnSavedArticlesPage] = useState(false);
-
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const location = useLocation().pathname.substring(1);
 
   //determine if user is on saved-articles page
@@ -42,9 +43,21 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
+  function handleLogIn() {
+    setLoggedIn(true);
+    setIsSignInOpen(false);
+  }
+
+  function handleRegister() {
+    setIsSignUpOpen(false);
+    setIsSuccessPopupOpen(true);
+
+  }
+
   function handleSignInClick() {
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
+    setIsSuccessPopupOpen(false);
   }
 
   function handleSignUpClick() {
@@ -55,6 +68,7 @@ function App() {
   function closeAllPopups() {
     setIsSignInOpen(false);
     setIsSignUpOpen(false);
+    setIsSuccessPopupOpen(false);
   }
 
   return (
@@ -93,9 +107,16 @@ function App() {
         isOpen={isSignInOpen}
         onClose={closeAllPopups}
         onSignUpClick={handleSignUpClick}
+        onLogInSubmit={handleLogIn}
       />
       <SignUp
         isOpen={isSignUpOpen}
+        onClose={closeAllPopups}
+        onSignInClick={handleSignInClick}
+        onRegisterSubmit={handleRegister}
+      />
+      <SuccessPopup
+        isOpen={isSuccessPopupOpen}
         onClose={closeAllPopups}
         onSignInClick={handleSignInClick}
       />
