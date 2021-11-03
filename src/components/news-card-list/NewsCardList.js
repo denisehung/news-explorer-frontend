@@ -1,50 +1,96 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './NewsCardList.css';
 import NewsCard from '../newsCard/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
-const postsPerRow = 3;
-// let arrayForHoldingPosts = [];
 
 function NewsCardList(props) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
+  const [onSavedArticlesPage, setOnSavedArticlesPage] = useState(false);
+  const location = useLocation();
+  const savedArticlesPath = ['saved-articles'];
 
+  //determine if we're on saved-articles page
   React.useEffect(() => {
-    loopWithSlice(0, postsPerRow);
-  }, []);
+    if (window.location.href.includes(savedArticlesPath)) {
+      setOnSavedArticlesPage(true);
+    } else {
+      setOnSavedArticlesPage(false);
+    }
+  }, [window.location]);
 
-  function loopWithSlice(start, end) {
-    setDisplayedCards(cardsArray.slice(start, end));
-    // arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-    // setDisplayedCards(arrayForHoldingPosts);
-  }
+  // start with 3 news cards (on saved-articles, show all cards)
+  React.useEffect(() => {
+    if (!onSavedArticlesPage) {
+      setDisplayedCards(cardsArray.slice(0, 3));
+    } else {
+      setDisplayedCards(cardsArray);
+    }
+  }, [window.location]);
 
+  console.log(onSavedArticlesPage);
+
+  // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
-    loopWithSlice(0, next + postsPerRow);
-    setNext(next + postsPerRow);
-    console.log(displayedCards);
+    setDisplayedCards(cardsArray.slice(0, next + 3));
+    setNext(next + 3);
   }
 
   return (
-    <section className='news-card-list'>
+    <section
+      className={`news-card-list ${
+        onSavedArticlesPage && 'news-card-list_saved-articles'
+      }`}
+    >
       <div className='news-card-list__container'>
-        {!props.isSavedArticlesPage && (
+        {!onSavedArticlesPage && (
           <h3 className='news-card-list__title'>Search results</h3>
         )}
-        <div className='news-card-list__card-grid'>
+        <div
+          className={`news-card-list__card-grid ${
+            onSavedArticlesPage && 'news-card-list__card-grid_saved-articles'
+          }`}
+        >
           {displayedCards.map((newscard) => (
             <NewsCard key={newscard.id} data={newscard} />
           ))}
         </div>
-        <button
-          className='news-card-list__show-more-button'
-          onClick={handleShowMoreCards}
-        >
-          Show more
-        </button>
+        {!onSavedArticlesPage && (
+          <button
+            className='news-card-list__show-more-button'
+            onClick={handleShowMoreCards}
+          >
+            Show more
+          </button>
+        )}
       </div>
     </section>
   );
 }
 
 export default NewsCardList;
+
+// function which might be needed when we grab the data from the news API
+
+// const postsPerRow = 3;
+// let arrayForHoldingPosts = [];
+
+// function NewsCardList(props) {
+//   const [displayedCards, setDisplayedCards] = useState([]);
+//   const [next, setNext] = useState(3);
+
+//   React.useEffect(() => {
+//     loopWithSlice(0, postsPerRow);
+//   }, []);
+
+//   function loopWithSlice(start, end) {
+//     const slicedPosts = cardsArray.slice(start, end);
+//     arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+//     setDisplayedCards(arrayForHoldingPosts);
+//   }
+
+//   function handleShowMoreCards() {
+//     loopWithSlice(0, next + postsPerRow);
+//     setNext(next + postsPerRow);
+//   };

@@ -3,6 +3,10 @@
   padding: 80px 0;
 }
 
+.news-card-list_saved-articles {
+  padding: 62px 0;
+}
+
 .news-card-list__container {
   max-width: 1232px;
   width: 85.55%;
@@ -29,6 +33,10 @@
   column-gap: 16px;
   row-gap: 16px;
   margin: 64px 0;
+}
+
+.news-card-list__card-grid_saved-articles {
+  margin: 0;
 }
 
 .news-card-list__show-more-button {

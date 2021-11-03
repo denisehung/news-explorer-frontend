@@ -8,13 +8,12 @@ import SignIn from './components/signIn/SignIn';
 import SignUp from './components/signUp/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
 // import SuccessPopup from './components/successPopup/SuccessPopup';
-import cardsArray from './arrays/cardsArray';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  const [isSavedArticlesPage, setIsSavedArticlesPage] = useState(false);
+  // const [isSavedArticlesPage, setIsSavedArticlesPage] = useState(false);
 
   // Close popup with Escape button
   useEffect(() => {
@@ -50,7 +49,7 @@ function App() {
         onSignInClick={handleSignInClick}
       />
       <SearchHero />
-      <NewsCardList cardsArray={cardsArray} isSavedArticlesPage={isSavedArticlesPage}/>
+      <NewsCardList />
       <About />
       <Footer />
       <SignIn 
