@@ -28,9 +28,9 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  function logIn() {
-    setLoggedIn(true)
-  };
+  // function logIn() {
+  //   setLoggedIn(true)
+  // };
 
   function logOut() {
     setLoggedIn(false);

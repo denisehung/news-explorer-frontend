@@ -10,7 +10,7 @@ import NewsCardList from './components/news-card-list/NewsCardList';
 // import SuccessPopup from './components/successPopup/SuccessPopup';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   // const [isSavedArticlesPage, setIsSavedArticlesPage] = useState(false);

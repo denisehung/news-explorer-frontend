@@ -8,17 +8,17 @@ function NewsCardList(props) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
   const [onSavedArticlesPage, setOnSavedArticlesPage] = useState(false);
-  const location = useLocation();
-  const savedArticlesPath = ['saved-articles'];
+  const location = useLocation().pathname.substring(1);
 
   //determine if we're on saved-articles page
   React.useEffect(() => {
-    if (window.location.href.includes(savedArticlesPath)) {
+    const savedArticlesPath = ['saved-articles'];
+    if (savedArticlesPath.includes(location)) {
       setOnSavedArticlesPage(true);
     } else {
       setOnSavedArticlesPage(false);
     }
-  }, [window.location]);
+  }, [location]);
 
   // start with 3 news cards (on saved-articles, show all cards)
   React.useEffect(() => {
@@ -27,7 +27,7 @@ function NewsCardList(props) {
     } else {
       setDisplayedCards(cardsArray);
     }
-  }, [window.location]);
+  }, [onSavedArticlesPage]);
 
   console.log(onSavedArticlesPage);
 
