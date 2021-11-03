@@ -3,6 +3,7 @@
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+  background-color: #FFFFFF;
 }
 
 .news-card__image {
