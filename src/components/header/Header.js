@@ -5,8 +5,17 @@ import MobileNavigationWrapper from '../mobile-navigation-wrapper/MobileNavigati
 import MenuHamburgerIcon from '../../images/menu-hamburger-icon.svg';
 import MenuCloseIcon from '../../images/menu-close-icon.svg';
 import MenuLogoutIconWhite from '../../images/menu-logout-icon_type_white.svg';
+import MenuLogoutIconBlack from '../../images/menu-logout-icon_type_black.svg';
 
-function Header({ loggedIn, setLoggedIn, onSignInClick }) {
+function Header({
+  loggedIn,
+  setLoggedIn,
+  onSignInClick,
+  setIsNewsCardListOpen,
+  setSearchKeyword,
+  onSavedArticlesPage,
+  setOnSavedArticlesPage,
+}) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [mobileWidth, setMobileWidth] = React.useState(false);
 
@@ -24,8 +33,13 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
     return () => window.removeEventListener('resize', checkWidth);
   });
 
-  function onNavClick() {
+  function onHamburgerClick() {
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  function resetSearchResults() {
+    setIsNewsCardListOpen(false);
+    setSearchKeyword('');
   }
 
   // function logIn() {
@@ -34,6 +48,7 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
 
   function logOut() {
     setLoggedIn(false);
+    resetSearchResults();
   }
 
   return loggedIn ? (
@@ -42,14 +57,21 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
         isMenuOpen ? 'header_mobile-menu-open' : 'header_mobile-menu-closed'
       }`}
     >
-      <NavLink className='header__logo' exact to='/'>
+      <NavLink
+        className={`header__logo ${
+          onSavedArticlesPage && 'header__logo_saved-articles '
+        }`}
+        exact
+        to='/'
+        onClick={resetSearchResults}
+      >
         NewsExplorer
       </NavLink>
       <img
         className='header__menu-icon'
         alt='menu icon'
         src={isMenuOpen ? MenuCloseIcon : MenuHamburgerIcon}
-        onClick={onNavClick}
+        onClick={onHamburgerClick}
       />
       <div
         className={`header__navigation ${
@@ -60,31 +82,46 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
       >
         <MobileNavigationWrapper mobileWidth={mobileWidth}>
           <NavLink
-            className='header__link-home'
-            activeClassName='header__active_color_white'
+            className={`header__link-home ${
+              onSavedArticlesPage && 'header_color_black'
+            }`}
+            activeClassName={
+              onSavedArticlesPage
+                ? 'header__active_color_black'
+                : 'header__active_color_white'
+            }
             exact
             to='/'
+            onClick={resetSearchResults}
           >
             Home
           </NavLink>
           <NavLink
-            className='header__link-saved-articles'
-            activeClassName='header__active_color_white'
+            className={`header__link-saved-articles ${
+              onSavedArticlesPage && 'header_color_black'
+            }`}
+            activeClassName={
+              onSavedArticlesPage
+                ? 'header__active_color_black'
+                : 'header__active_color_white'
+            }
             to='/saved-articles'
           >
             Saved articles
           </NavLink>
           <NavLink
-            className={
-              'header__log-button header__signout-button header__log-button_logged-in'
-            }
+            className={`header__log-button header__signout-button header__log-button_logged-in ${
+              onSavedArticlesPage && 'header__log-button_saved-articles'
+            }`}
             to=''
             onClick={logOut}
           >
             <p className='header__log-button-username'>Colin</p>
             <img
               className='header__log-button-logout-icon'
-              src={MenuLogoutIconWhite}
+              src={
+                onSavedArticlesPage ? MenuLogoutIconBlack : MenuLogoutIconWhite
+              }
               alt=''
             />
           </NavLink>
@@ -97,14 +134,19 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
         isMenuOpen ? 'header_mobile-menu-open' : 'header_mobile-menu-closed'
       }`}
     >
-      <NavLink className='header__logo' exact to='/'>
+      <NavLink
+        className='header__logo'
+        exact
+        to='/'
+        onClick={resetSearchResults}
+      >
         NewsExplorer
       </NavLink>
       <img
         className='header__menu-icon'
         alt='menu icon'
         src={isMenuOpen ? MenuCloseIcon : MenuHamburgerIcon}
-        onClick={onNavClick}
+        onClick={onHamburgerClick}
       />
       <div
         className={`header__navigation ${
@@ -119,6 +161,7 @@ function Header({ loggedIn, setLoggedIn, onSignInClick }) {
             activeClassName='header__active_color_white'
             exact
             to='/'
+            onClick={resetSearchResults}
           >
             Home
           </NavLink>

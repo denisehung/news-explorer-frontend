@@ -1,26 +1,11 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import './NewsCardList.css';
 import NewsCard from '../newsCard/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
 
-function NewsCardList(props) {
+function NewsCardList(props, { onSavedArticlesPage, setOnSavedArticlesPage }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
-  const [onSavedArticlesPage, setOnSavedArticlesPage] = useState(false);
-  const location = useLocation().pathname.substring(1);
-
-  //determine if we're on saved-articles page
-  React.useEffect(() => {
-    const savedArticlesPath = ['saved-articles'];
-    if (savedArticlesPath.includes(location)) {
-      setOnSavedArticlesPage(true);
-      setNext(3);
-    } else {
-      setOnSavedArticlesPage(false);
-      setNext(3);
-    }
-  }, [location]);
 
   // start with 3 news cards (on saved-articles, show all cards)
   React.useEffect(() => {
