@@ -14,7 +14,6 @@ function SearchHero({
     e.preventDefault();
     //api call to PUT the keyword into the filter...
     setIsNewsCardListOpen(true);
-    console.log('form submitted');
     setSearchKeyword('');
   }
 

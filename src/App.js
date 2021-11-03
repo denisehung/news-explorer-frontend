@@ -57,8 +57,6 @@ function App() {
     setIsSignUpOpen(false);
   }
 
-  console.log(onSavedArticlesPage);
-
   return (
     <>
       <Header

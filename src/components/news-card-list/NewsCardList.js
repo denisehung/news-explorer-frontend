@@ -22,8 +22,6 @@ function NewsCardList(props, { onSavedArticlesPage, setOnSavedArticlesPage }) {
     setNext(next + 3);
   }
 
-  console.log(next);
-
   return (
     <section
       className={`news-card-list ${
