@@ -15,8 +15,10 @@ function NewsCardList(props) {
     const savedArticlesPath = ['saved-articles'];
     if (savedArticlesPath.includes(location)) {
       setOnSavedArticlesPage(true);
+      setNext(3);
     } else {
       setOnSavedArticlesPage(false);
+      setNext(3);
     }
   }, [location]);
 
@@ -29,13 +31,13 @@ function NewsCardList(props) {
     }
   }, [onSavedArticlesPage]);
 
-  console.log(onSavedArticlesPage);
-
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
     setDisplayedCards(cardsArray.slice(0, next + 3));
     setNext(next + 3);
   }
+
+  console.log(next);
 
   return (
     <section
