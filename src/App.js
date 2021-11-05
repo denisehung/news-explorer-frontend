@@ -91,7 +91,6 @@ function App() {
           {isNewsCardListOpen && (
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
-              setOnSavedArticlesPage={setOnSavedArticlesPage}
             />
           )}
           <About />
@@ -99,7 +98,6 @@ function App() {
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
           <NewsCardList
             onSavedArticlesPage={onSavedArticlesPage}
-            setOnSavedArticlesPage={setOnSavedArticlesPage}
           />
         </ProtectedRoute>
       </Switch>
