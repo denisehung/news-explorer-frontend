@@ -8,7 +8,11 @@ import Footer from './components/footer/Footer';
 import SignIn from './components/signIn/SignIn';
 import SignUp from './components/signUp/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
+
+import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
+
 import NoResults from './components/no-results/NoResults';
+
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 // import SuccessPopup from './components/successPopup/SuccessPopup';
 import SuccessPopup from './components/successPopup/SuccessPopup';
@@ -92,7 +96,11 @@ function App() {
           {(hasResults && isNewsCardListOpen) && (
             <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
           )}
+
+          <PreloaderAnimation />
+
           {(!hasResults && isNewsCardListOpen) && <NoResults />}
+
           <About />
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
