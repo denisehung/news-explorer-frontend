@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer';
 import SignIn from './components/signIn/SignIn';
 import SignUp from './components/signUp/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
+import NoResults from './components/no-results/NoResults';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 // import SuccessPopup from './components/successPopup/SuccessPopup';
 import SuccessPopup from './components/successPopup/SuccessPopup';
@@ -20,6 +21,7 @@ function App() {
   const [isNewsCardListOpen, setIsNewsCardListOpen] = useState(false);
   const [onSavedArticlesPage, setOnSavedArticlesPage] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
 
   //determine if user is on saved-articles page
@@ -51,7 +53,6 @@ function App() {
   function handleRegister() {
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(true);
-
   }
 
   function handleSignInClick() {
@@ -88,17 +89,14 @@ function App() {
             setSearchKeyword={setSearchKeyword}
             setIsNewsCardListOpen={setIsNewsCardListOpen}
           />
-          {isNewsCardListOpen && (
-            <NewsCardList
-              onSavedArticlesPage={onSavedArticlesPage}
-            />
+          {(hasResults && isNewsCardListOpen) && (
+            <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
           )}
+          {(!hasResults && isNewsCardListOpen) && <NoResults />}
           <About />
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
-          <NewsCardList
-            onSavedArticlesPage={onSavedArticlesPage}
-          />
+          <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
         </ProtectedRoute>
       </Switch>
       <SignIn
