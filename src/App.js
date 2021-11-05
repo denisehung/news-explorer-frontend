@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer';
 import SignIn from './components/signIn/SignIn';
 import SignUp from './components/signUp/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
+import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 // import SuccessPopup from './components/successPopup/SuccessPopup';
 import SuccessPopup from './components/successPopup/SuccessPopup';
@@ -51,7 +52,6 @@ function App() {
   function handleRegister() {
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(true);
-
   }
 
   function handleSignInClick() {
@@ -94,6 +94,7 @@ function App() {
               setOnSavedArticlesPage={setOnSavedArticlesPage}
             />
           )}
+          <PreloaderAnimation />
           <About />
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
