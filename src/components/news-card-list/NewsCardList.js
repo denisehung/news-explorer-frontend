@@ -3,7 +3,7 @@ import './NewsCardList.css';
 import NewsCard from '../newsCard/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
 
-function NewsCardList(props, { onSavedArticlesPage, setOnSavedArticlesPage }) {
+function NewsCardList( { onSavedArticlesPage }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
 
