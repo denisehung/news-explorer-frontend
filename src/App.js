@@ -21,6 +21,7 @@ function App() {
   const [isNewsCardListOpen, setIsNewsCardListOpen] = useState(false);
   const [onSavedArticlesPage, setOnSavedArticlesPage] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
 
   //determine if user is on saved-articles page
@@ -88,10 +89,10 @@ function App() {
             setSearchKeyword={setSearchKeyword}
             setIsNewsCardListOpen={setIsNewsCardListOpen}
           />
-          {isNewsCardListOpen && (
+          {(hasResults && isNewsCardListOpen) && (
             <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
           )}
-          <NoResults />
+          {(!hasResults && isNewsCardListOpen) && <NoResults />}
           <About />
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
