@@ -8,13 +8,9 @@ import Footer from './components/footer/Footer';
 import SignIn from './components/signIn/SignIn';
 import SignUp from './components/signUp/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
-
 import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
-
 import NoResults from './components/no-results/NoResults';
-
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
-// import SuccessPopup from './components/successPopup/SuccessPopup';
 import SuccessPopup from './components/successPopup/SuccessPopup';
 
 function App() {
@@ -93,11 +89,12 @@ function App() {
             setSearchKeyword={setSearchKeyword}
             setIsNewsCardListOpen={setIsNewsCardListOpen}
           />
-          {(hasResults && isNewsCardListOpen) && (
-            <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
-          )}
+          <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
+        {/*}  {(hasResults && isNewsCardListOpen) && (
+            
+          )} */}
 
-          <PreloaderAnimation />
+         {/*} <PreloaderAnimation /> */}
 
           {(!hasResults && isNewsCardListOpen) && <NoResults />}
 

@@ -75,7 +75,73 @@
   height: 40px;
   top: 24px;
   right: 24px;
-  background-image: url('../../images/save-icon.svg');
+  background-image: url('../../images/save-icon-grey.svg');
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.news-card__button_save:hover {
+  background-image: url('../../images/save-icon-black.svg');
+}
+
+.news-card__button_save_active, .news-card__button_save_active:hover {
+  background-image: url('../../images/save-icon-blue.svg');
+}
+
+.news-card__button_delete {
+  width: 40px;
+  height: 40px;
+  top: 24px;
+  right: 24px;
+  background-image: url('../../images/trash-icon-grey.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.2s ease;
+}
+
+.news-card__button_delete:hover {
+  background-image: url('../../images/trash-icon-black.svg');
+}
+
+.news-card__keyword-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  top: 24px;
+  left: 24px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  border: none;
+  background: #fff;
+  border-radius: 10px;
+  position: absolute;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+.news-card__tooltip {
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  top: 24px;
+  right: 70px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background: #fff;
+  border-radius: 10px;
+  position: absolute;
+  padding-left: 22px;
+  padding-right: 22px;
+  display: none;
+}
+
+.news-card__button:hover + .news-card__tooltip {
+  display: flex;
 }
