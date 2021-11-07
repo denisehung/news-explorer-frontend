@@ -92,12 +92,7 @@
   color: #FF0000;
   margin: 0;
   position: absolute;
-  bottom: -17px;
-  opacity: 1;
-}
-
-.popup__error_visible {
-  opacity: 1;
+  bottom: -25px;
 }
 
 .popup__submit-button {
@@ -106,8 +101,6 @@
   line-height: 24px;
   width: 100%;
   margin: 0 auto;
-  background-color: #2F71E5;
-  color: white;
   border-radius: 100px;
   display: block;
   height: 64px;
@@ -115,14 +108,21 @@
   outline: none;
   border: none;
   cursor: pointer;
-  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  background-color: #E6E8EB;
+  color: #B6BCBF;
 }
 
-.popup__submit-button:hover {
+.popup__submit-button_active { 
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  background-color: #2F71E5;
+  color: white;
+}
+
+.popup__submit-button_active:hover {
   background-color: #347EFF;
 }
 
-.popup__submit-button:focus {
+.popup__submit-button_active:focus {
   background-color: #2A65CC;
 }
 

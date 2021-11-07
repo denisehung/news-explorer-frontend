@@ -1,57 +1,46 @@
-import React, { useState } from "react";
+import React from 'react';
 import PopupWithForm from '../popupWithForm/PopupWithForm';
 
-function SignUp(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-
-  function handleEmail(e) {
-    let emailValue = e.currentTarget.value;
-    setEmail(emailValue);
-  }
-
-  function handlePassword(e) {
-    let passwordValue = e.currentTarget.value;
-    setPassword(passwordValue);
-  }
-
-  function handleName(e) {
-    let nameValue = e.currentTarget.value;
-    setName(nameValue);
-  }
+function SignUp({ 
+  isOpen, 
+  onClose, 
+  isLoading, 
+  onRegisterSubmit,
+  onSignInClick,
+  handleChange,
+  errors,
+  isValid,
+  name
+}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onRegisterSubmit();
-    setEmail('');
-    setPassword('');
-    setName('');
+    onRegisterSubmit();
   } 
 
   return(
-    <PopupWithForm name="sign-up" title="Sign up" isOpen={props.isOpen} onClose={props.onClose} isLoading={props.isLoading} onSubmit={handleSubmit}>
+    <PopupWithForm name="sign-up" title="Sign up" isOpen={isOpen} onClose={onClose} isLoading={isLoading} onSubmit={handleSubmit}>
 
       <div className="popup__input-wrapper">
         <label className="popup__input-label" htmlFor="email-input">Email</label>
-        <input type="email" className="popup__input" id={`email-input-${props.name}`} autoComplete="off" placeholder="Enter email" name="email" value={email} onChange={handleEmail} required />
-        <p id="email-input-error" className="popup__error"></p>
+        <input type="email" className="popup__input" id={`email-input-${name}`} autoComplete="off" placeholder="Enter email" name="email" onChange={handleChange} required />
+        <p id="email-input-error" className="popup__error">{errors.email}</p>
       </div>
 
       <div className="popup__input-wrapper">
         <label className="popup__input-label" htmlFor="password-input">Password</label>
-        <input type="password" className="popup__input" id={`password-input-${props.name}`} autoComplete="off" placeholder="Enter password" name="password" value={password} onChange={handlePassword} required />
-        <p id="password-input-error" className="popup__error"></p>
+        <input type="password" className="popup__input" id={`password-input-${name}`} autoComplete="off" placeholder="Enter password" name="password" onChange={handleChange} minLength ="5" required />
+        <p id="password-input-error" className="popup__error">{errors.password}</p>
       </div>
 
       <div className="popup__input-wrapper">
         <label className="popup__input-label" htmlFor="username-input">Username</label>
-        <input type="username" className="popup__input" id="username-input" autoComplete="off" placeholder="Enter username" name="username" value={name}  onChange={handleName} required />
-        <p id="password-input-error" className="popup__error"></p>
+        <input type="username" className="popup__input" id="username-input" autoComplete="off" placeholder="Enter username" name="username" onChange={handleChange} required />
+        <p id="password-input-error" className="popup__error">{errors.username}</p>
       </div>
 
-        <button className="popup__submit-button" type="submit" aria-label="Sign in">Sign up</button>
-        <p className='popup__signin-signup'>or <span className='popup__link' onClick={props.onSignInClick}>Sign in</span></p>
+        <button className={`popup__submit-button ${isValid ? "popup__submit-button_active" : ""}`} type="submit" aria-label="Sign up" disabled={!isValid}>Sign up</button>
+        <p className='popup__signin-signup'>or <span className='popup__link' onClick={onSignInClick}>Sign in</span></p>
     </PopupWithForm>
   );
 }

@@ -6,7 +6,6 @@ function NewsCard({data}) {
   const location = useLocation();
   const [isSaved, setIsSaved] = React.useState(false);
 
-
   function handleSave() {
     setIsSaved(!isSaved);
   }
@@ -17,7 +16,7 @@ function NewsCard({data}) {
 
       {location.pathname === '/' && 
       <>
-        <button className={`news-card__button news-card__button_save ${isSaved ? "news-card__button_save_active" : ""}`}onClick={handleSave}></button>
+        <button className={`news-card__button news-card__button_save ${isSaved ? "news-card__button_save_active" : ""}`} onClick={handleSave}></button>
         <div className="news-card__tooltip">Sign in to save articles</div>
       </>
       }
