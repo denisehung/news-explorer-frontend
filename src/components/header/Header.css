@@ -21,7 +21,7 @@
   color: white;
   margin: 0;
   text-decoration: none;
-  transition: all 0.4s ease;
+  /*transition: all 0.4s ease;*/
 }
 
 .header__menu-icon {
@@ -40,7 +40,7 @@
   height: 100%;
   color: #b6bcbf;
   line-height: 80px;
-  transition: all 0.4s ease;
+  /*transition: all 0.4s ease;*/
   text-decoration: none;
 }
 
@@ -48,7 +48,7 @@
   height: 100%;
   color: #b6bcbf;
   line-height: 80px;
-  transition: all 0.4s ease;
+  /*transition: all 0.4s ease;*/
   margin: 0 64px 0 76px;
   text-decoration: none;
 }
@@ -60,7 +60,7 @@
   line-height: 24px;
   text-align: center;
   border-radius: 100px;
-  transition: all 0.4s ease;
+  transition: width 0.4s ease;
   text-decoration: none;
   margin: auto 0 auto 42px;
   display: flex;

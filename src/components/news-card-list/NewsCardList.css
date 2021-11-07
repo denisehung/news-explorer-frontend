@@ -58,3 +58,9 @@
   cursor: pointer;
   background-color: #e8e8e8;
 }
+
+@media screen and (max-width: 700px) {
+  .news-card-list__card-grid {
+    grid-template-columns: 1fr;
+  }
+}
