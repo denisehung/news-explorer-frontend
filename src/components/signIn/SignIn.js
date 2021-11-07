@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PopupWithForm from '../popupWithForm/PopupWithForm';
+import FormValidator from '../../utils/formValidator';
 
 function SignIn({ 
     isOpen, 
     onClose, 
-    isLoading, 
     onLogInSubmit,
-    onSignUpClick,
+    onSignUpClick
+  }) {
+
+  const {
+    values,
     handleChange,
     errors,
     isValid,
-    name
-  }) {
+    resetForm,
+  } = FormValidator();
+
+  useEffect(() => {
+    resetForm();
+  }, [isOpen, resetForm]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,18 +27,18 @@ function SignIn({
   } 
 
   return(
-    <PopupWithForm name="sign-in" title="Sign in" isOpen={isOpen} onClose={onClose} isLoading={isLoading} onSubmit={handleSubmit}>
+    <PopupWithForm name="login" title="Sign in" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
 
       <div className="popup__input-wrapper">
         <label className="popup__input-label" htmlFor="email-input">Email</label>
-        <input type="email" className="popup__input" id={`email-input-${name}`} autoComplete="off" placeholder="Enter email" name="email" onChange={handleChange} required />
-        <p id="email-input-error" className="popup__error">{errors.email}</p>
+        <input type="email" className="popup__input" id="email-login" autoComplete="on" placeholder="Enter email" name="email" onChange={handleChange} value={values.email || ''} required />
+        <p id="email-input-error" className="popup__error">{errors.email || ''}</p>
       </div>
 
       <div className="popup__input-wrapper">
         <label className="popup__input-label" htmlFor="password-input">Password</label>
-        <input type="password" className="popup__input" id={`password-input-${name}`} autoComplete="off" placeholder="Enter password" name="password" onChange={handleChange} minLength="5" required />
-        <p id="password-input-error" className="popup__error">{errors.password}</p>
+        <input type="password" className="popup__input" id={`password-login`} autoComplete="on" placeholder="Enter password" name="password" onChange={handleChange} value={values.password || ''} minLength="5" maxLength="30" required />
+        <p id="password-input-error" className="popup__error">{errors.password || ''}</p>
       </div>
 
       <button className={`popup__submit-button ${isValid ? "popup__submit-button_active" : ""}`} type="submit" aria-label="Sign in" disabled={!isValid}>Sign in</button>

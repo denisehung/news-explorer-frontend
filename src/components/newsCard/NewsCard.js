@@ -15,15 +15,15 @@ function NewsCard({ data, onSavedArticlesPage }) {
       {!onSavedArticlesPage && 
       <>
         <button className={`news-card__button news-card__button_save ${isSaved ? "news-card__button_save_active" : ""}`} onClick={handleSave}></button>
-        <div className="news-card__tooltip">Sign in to save articles</div>
+        <div className="news-card__tag news-card__tag_type_tooltip">Sign in to save articles</div>
       </>
       }
 
       {onSavedArticlesPage &&
       <>
         <button className="news-card__button news-card__button_delete"></button>
-        <div className="news-card__tooltip">Remove from saved</div>
-        <div className="news-card__keyword-tag">Keyword</div>
+        <div className="news-card__tag news-card__tag_type_tooltip">Remove from saved</div>
+        <div className="news-card__tag news-card__tag_type_keyword">Keyword</div>
       </>}
 
       <div className="news-card__details">

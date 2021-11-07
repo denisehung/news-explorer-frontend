@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
@@ -15,7 +15,7 @@ import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import SuccessPopup from './components/successPopup/SuccessPopup';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState([]);
@@ -24,22 +24,6 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
-
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false);
-
-  const resetForm = useCallback(
-    (
-      newValues = { email: '', password: '', username: '' }, 
-      newErrors = {}, 
-      newIsValid = false) => {
-        setValues(newValues);
-        setErrors(newErrors);
-        setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid]
-  );
 
   //determine if user is on saved-articles page
   useEffect(() => {
@@ -56,36 +40,31 @@ function App() {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
         closeAllPopups();
-        resetForm();
       }
     };
     document.addEventListener('keydown', closeByEscape);
     return () => document.removeEventListener('keydown', closeByEscape);
-  }, [resetForm]);
+  }, []);
 
   function handleLogIn() {
     setLoggedIn(true);
     setIsSignInOpen(false);
-    resetForm();
   }
 
   function handleRegister() {
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(true);
-    resetForm();
   }
 
   function handleSignInClick() {
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(false);
-    resetForm();
   }
 
   function handleSignUpClick() {
     setIsSignUpOpen(true);
     setIsSignInOpen(false);
-    resetForm();
   }
 
   function closeAllPopups() {
@@ -93,15 +72,6 @@ function App() {
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(false);
   }
-
-  const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
-  };
 
   return (
     <>
@@ -137,18 +107,12 @@ function App() {
         </ProtectedRoute>
       </Switch>
       <SignIn
-        isValid={isValid}
-        handleChange={handleChange}
-        errors={errors}
         isOpen={isSignInOpen}
         onClose={closeAllPopups}
         onSignUpClick={handleSignUpClick}
         onLogInSubmit={handleLogIn}
       />
       <SignUp
-        isValid={isValid}
-        handleChange={handleChange}
-        errors={errors}
         isOpen={isSignUpOpen}
         onClose={closeAllPopups}
         onSignInClick={handleSignInClick}
