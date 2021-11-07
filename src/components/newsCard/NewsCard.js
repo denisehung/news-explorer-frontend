@@ -1,10 +1,8 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import './NewsCard.css';
 
-function NewsCard({data}) {
-  const location = useLocation();
-  const [isSaved, setIsSaved] = React.useState(false);
+function NewsCard({ data, onSavedArticlesPage }) {
+  const [isSaved, setIsSaved] = useState(false);
 
   function handleSave() {
     setIsSaved(!isSaved);
@@ -14,14 +12,14 @@ function NewsCard({data}) {
     <div className="news-card">
       <img src={data.image} alt={data.alt} className="news-card__image" />
 
-      {location.pathname === '/' && 
+      {!onSavedArticlesPage && 
       <>
         <button className={`news-card__button news-card__button_save ${isSaved ? "news-card__button_save_active" : ""}`} onClick={handleSave}></button>
         <div className="news-card__tooltip">Sign in to save articles</div>
       </>
       }
 
-      {location.pathname === '/saved-articles' &&
+      {onSavedArticlesPage &&
       <>
         <button className="news-card__button news-card__button_delete"></button>
         <div className="news-card__tooltip">Remove from saved</div>

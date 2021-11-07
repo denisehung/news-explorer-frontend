@@ -38,7 +38,7 @@ function NewsCardList( { onSavedArticlesPage }) {
           }`}
         >
           {displayedCards.map((newscard) => (
-            <NewsCard key={newscard.id} data={newscard} />
+            <NewsCard key={newscard.id} data={newscard} onSavedArticlesPage={onSavedArticlesPage} />
           ))}
         </div>
         {!onSavedArticlesPage && (

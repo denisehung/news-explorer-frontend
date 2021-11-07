@@ -133,7 +133,7 @@ function App() {
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
           <SavedNewsHeader />
-          <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
+          <NewsCardList onSavedArticlesPage={onSavedArticlesPage} loggedIn={loggedIn} />
         </ProtectedRoute>
       </Switch>
       <SignIn
