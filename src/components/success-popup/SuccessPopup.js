@@ -1,5 +1,5 @@
 import React from "react";
-import PopupWithForm from '../popupWithForm/PopupWithForm';
+import PopupWithForm from '../popup-with-form/PopupWithForm';
 
 function SuccessPopup(props) {
   return(

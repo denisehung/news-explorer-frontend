@@ -5,14 +5,14 @@ import Header from './components/header/Header';
 import SearchHero from './components/search-hero/SearchHero';
 import About from './components/about/About';
 import Footer from './components/footer/Footer';
-import SignIn from './components/signIn/SignIn';
-import SignUp from './components/signUp/SignUp';
+import SignIn from './components/sign-in/SignIn';
+import SignUp from './components/sign-up/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
 import SavedNewsHeader from './components/saved-news-header/SavedNewsHeader';
 import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
 import NoResults from './components/no-results/NoResults';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
-import SuccessPopup from './components/successPopup/SuccessPopup';
+import SuccessPopup from './components/success-popup/SuccessPopup';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
