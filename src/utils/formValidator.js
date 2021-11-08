@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 function FormValidator() {
-  const [values, setValues] = React.useState({});
-  const [errors, setErrors] = React.useState({});
-  const [isValid, setIsValid] = React.useState(false);
+  const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
     const { target } = event;
