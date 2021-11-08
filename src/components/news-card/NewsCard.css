@@ -128,10 +128,6 @@
 }
 
 .news-card__tag_type_tooltip {
-  display: none;
-  right: 70px;
-}
-
-.news-card__button:hover + .news-card__tag_type_tooltip {
   display: flex;
+  right: 70px;
 }
