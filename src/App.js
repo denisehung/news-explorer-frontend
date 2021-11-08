@@ -15,7 +15,7 @@ import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import SuccessPopup from './components/success-popup/SuccessPopup';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState([]);
@@ -90,20 +90,26 @@ function App() {
             setSearchKeyword={setSearchKeyword}
             setIsNewsCardListOpen={setIsNewsCardListOpen}
           />
-          <NewsCardList onSavedArticlesPage={onSavedArticlesPage} />
-        {/*}  {(hasResults && isNewsCardListOpen) && (
+          <NewsCardList
+            onSavedArticlesPage={onSavedArticlesPage}
+            loggedIn={loggedIn}
+          />
+          {/*}  {(hasResults && isNewsCardListOpen) && (
             
           )} */}
 
-         {/*} <PreloaderAnimation /> */}
+          {/*} <PreloaderAnimation /> */}
 
-          {(!hasResults && isNewsCardListOpen) && <NoResults />}
+          {!hasResults && isNewsCardListOpen && <NoResults />}
 
           <About />
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
           <SavedNewsHeader />
-          <NewsCardList onSavedArticlesPage={onSavedArticlesPage} loggedIn={loggedIn} />
+          <NewsCardList
+            onSavedArticlesPage={onSavedArticlesPage}
+            loggedIn={loggedIn}
+          />
         </ProtectedRoute>
       </Switch>
       <SignIn
