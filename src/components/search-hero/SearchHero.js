@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchHero.css';
 
 function SearchHero({
-  searchKeyword,
   setSearchKeyword,
   setIsNewsCardListOpen,
 }) {
+
+  const [formInputValue, setFormInputValue] = useState('');
+  
   function handleChange(e) {
     setSearchKeyword(e.target.value);
+    setFormInputValue(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     //api call to PUT the keyword into the filter...
     setIsNewsCardListOpen(true);
-    setSearchKeyword('');
+    setFormInputValue('');
   }
 
   return (
@@ -29,7 +32,7 @@ function SearchHero({
           <input
             className='search-hero__input'
             placeholder='Enter topic'
-            value={searchKeyword}
+            value={formInputValue}
             onChange={handleChange}
           ></input>
           <button className='search-hero__button' type='submit'>
