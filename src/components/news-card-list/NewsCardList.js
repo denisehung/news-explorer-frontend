@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './NewsCardList.css';
-import NewsCard from '../newsCard/NewsCard';
+import NewsCard from '../news-card/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
 
 function NewsCardList( { onSavedArticlesPage, loggedIn }) {
