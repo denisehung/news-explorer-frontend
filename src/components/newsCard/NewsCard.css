@@ -103,13 +103,11 @@
   background-image: url('../../images/trash-icon-black.svg');
 }
 
-.news-card__keyword-tag {
-  display: flex;
+.news-card__tag {
   justify-content: center;
   align-items: center;
   height: 40px;
   top: 24px;
-  left: 24px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -120,28 +118,20 @@
   border-radius: 10px;
   position: absolute;
   padding-left: 22px;
-  padding-right: 22px;
+  padding-right: 22px;  
 }
 
-.news-card__tooltip {
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  top: 24px;
-  right: 70px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  text-align: center;
-  border: none;
-  background: #fff;
-  border-radius: 10px;
-  position: absolute;
-  padding-left: 22px;
-  padding-right: 22px;
+.news-card__tag_type_keyword {
+  display: flex;
+  left: 24px;
+  
+}
+
+.news-card__tag_type_tooltip {
   display: none;
+  right: 70px;
 }
 
-.news-card__button:hover + .news-card__tooltip {
+.news-card__button:hover + .news-card__tag_type_tooltip {
   display: flex;
 }

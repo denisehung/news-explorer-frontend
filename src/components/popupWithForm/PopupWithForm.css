@@ -91,8 +91,8 @@
   line-height: 15px;
   color: #FF0000;
   margin: 0;
-  position: absolute;
-  bottom: -25px;
+  position: relative;
+  bottom: -5px;
 }
 
 .popup__submit-button {

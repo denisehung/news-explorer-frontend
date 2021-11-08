@@ -3,7 +3,7 @@ import './NewsCardList.css';
 import NewsCard from '../newsCard/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
 
-function NewsCardList( { onSavedArticlesPage }) {
+function NewsCardList( { onSavedArticlesPage, loggedIn }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
 
@@ -38,7 +38,7 @@ function NewsCardList( { onSavedArticlesPage }) {
           }`}
         >
           {displayedCards.map((newscard) => (
-            <NewsCard key={newscard.id} data={newscard} onSavedArticlesPage={onSavedArticlesPage} />
+            <NewsCard key={newscard.id} data={newscard} onSavedArticlesPage={onSavedArticlesPage} loggedIn={loggedIn} />
           ))}
         </div>
         {!onSavedArticlesPage && (
