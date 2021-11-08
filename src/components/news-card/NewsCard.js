@@ -3,14 +3,9 @@ import './NewsCard.css';
 
 function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
   const [isSaved, setIsSaved] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   function handleSave() {
     setIsSaved(!isSaved);
-  }
-
-  function handleHover() {
-    setIsHovered(!isHovered);
   }
 
   return (
@@ -24,10 +19,8 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
               isSaved ? 'news-card__button_save_active' : ''
             }`}
             onClick={handleSave}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleHover}
           ></button>
-          {!loggedIn && isHovered && (
+          {!loggedIn && (
             <div className='news-card__tag news-card__tag_type_tooltip'>
               Sign in to save articles
             </div>

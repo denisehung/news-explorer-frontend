@@ -59,8 +59,22 @@
   background-color: #e8e8e8;
 }
 
+@media screen and (max-width: 768px) {
+  .news-card-list {
+    padding: 40px 0;
+  }
+
+  .news-card-list__card-grid {
+    margin: 32px 0;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .news-card-list__card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .news-card-list__card-grid {
+    margin-top: 58px;
   }
 }

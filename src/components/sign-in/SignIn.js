@@ -17,6 +17,7 @@ function SignIn({
     resetForm,
   } = FormValidator();
 
+  // Reset form when form is open
   useEffect(() => {
     resetForm();
   }, [isOpen, resetForm]);
