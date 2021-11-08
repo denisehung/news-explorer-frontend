@@ -20,7 +20,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
       {!onSavedArticlesPage && (
         <>
           <button
-            className={`news-card__button news-card__button_save ${
+            className={`news-card__button news-card__button_save ${loggedIn &&
               isSaved ? 'news-card__button_save_active' : ''
             }`}
             onClick={handleSave}
