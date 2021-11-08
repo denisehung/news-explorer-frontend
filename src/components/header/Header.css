@@ -40,7 +40,7 @@
   height: 100%;
   color: #b6bcbf;
   line-height: 80px;
-  /*transition: all 0.4s ease;*/
+  transition: all 0.4s ease;
   text-decoration: none;
 }
 
@@ -48,7 +48,7 @@
   height: 100%;
   color: #b6bcbf;
   line-height: 80px;
-  /*transition: all 0.4s ease;*/
+  transition: all 0.4s ease;
   margin: 0 64px 0 76px;
   text-decoration: none;
 }
@@ -104,6 +104,7 @@
 }
 
 .header__active_color_white {
+  color: #FFFFFF;
   box-shadow: inset 0 -3px 0 0 white;
 }
 
@@ -194,6 +195,10 @@
     line-height: 56px;
   }
 
+  .header__logo_menu-open {
+    color: white;
+  }
+
   .header__menu-icon {
     display: block;
     transition: opacity 0.4s ease;
@@ -262,7 +267,13 @@
     box-shadow: none;
   }
 
+  .header__active_color_black {
+    box-shadow: none;
+  }
+
   .header__log-button {
+    color: white;
+    border: 1px solid white;
     width: 100%;
     height: 56px;
     line-height: 56px;

@@ -46,6 +46,14 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
+  useEffect(() => {
+    if (searchKeyword) {
+      setHasResults(true);
+    } else {
+      setHasResults(false);
+    }
+  })
+
   function handleLogIn() {
     setLoggedIn(true);
     setIsSignInOpen(false);
@@ -90,18 +98,14 @@ function App() {
             setSearchKeyword={setSearchKeyword}
             setIsNewsCardListOpen={setIsNewsCardListOpen}
           />
-          <NewsCardList
-            onSavedArticlesPage={onSavedArticlesPage}
-            loggedIn={loggedIn}
-          />
-          {/*}  {(hasResults && isNewsCardListOpen) && (
-            
-          )} */}
-
-          {/*} <PreloaderAnimation /> */}
-
+          {hasResults && isNewsCardListOpen && (
+            <NewsCardList
+              onSavedArticlesPage={onSavedArticlesPage}
+              loggedIn={loggedIn}
+            />
+          )}
+          {/* <PreloaderAnimation /> */}
           {!hasResults && isNewsCardListOpen && <NoResults />}
-
           <About />
         </Route>
         <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
