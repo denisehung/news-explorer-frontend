@@ -32,20 +32,22 @@ function NewsCardList({ onSavedArticlesPage, loggedIn }) {
         {!onSavedArticlesPage && (
           <h3 className='news-card-list__title'>Search results</h3>
         )}
-        <div
+        <ul
           className={`news-card-list__card-grid ${
             onSavedArticlesPage && 'news-card-list__card-grid_saved-articles'
           }`}
         >
           {displayedCards.map((newscard) => (
-            <NewsCard
-              key={newscard.id}
-              data={newscard}
-              onSavedArticlesPage={onSavedArticlesPage}
-              loggedIn={loggedIn}
-            />
+            <li className='news-card-list__card'>
+              <NewsCard
+                key={newscard.id}
+                data={newscard}
+                onSavedArticlesPage={onSavedArticlesPage}
+                loggedIn={loggedIn}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
         {!onSavedArticlesPage && (
           <button
             className='news-card-list__show-more-button'

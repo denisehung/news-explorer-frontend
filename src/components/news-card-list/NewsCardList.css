@@ -33,6 +33,8 @@
   column-gap: 16px;
   row-gap: 16px;
   margin: 64px 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .news-card-list__card-grid_saved-articles {
@@ -66,6 +68,11 @@
 
   .news-card-list__card-grid {
     margin: 32px 0;
+  }
+
+  .news-card-list__title {
+    font-size: 30px;
+    line-height: 34px;
   }
 }
 

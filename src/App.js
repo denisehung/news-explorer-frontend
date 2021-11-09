@@ -82,7 +82,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className="page">
       <Header
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
@@ -134,7 +134,7 @@ function App() {
         onSignInClick={handleSignInClick}
       />
       <Footer />
-    </>
+    </div>
   );
 }
 

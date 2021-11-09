@@ -130,7 +130,7 @@ function Header({
         src={hamburgerDisplay}
         onClick={onHamburgerClick}
       />
-      <div
+      <nav
         className={`header__navigation ${
           mobileWidth && isMenuOpen
             ? 'header__navigation_type_mobile-active-logged-in'
@@ -178,11 +178,11 @@ function Header({
             <img
               className='header__log-button-logout-icon'
               src={logoutIconDisplay}
-              alt=''
+              alt='logout icon'
             />
           </NavLink>
         </MobileNavigationWrapper>
-      </div>
+      </nav>
     </header>
   ) : (
     <header
