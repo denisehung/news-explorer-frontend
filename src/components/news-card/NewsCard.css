@@ -60,6 +60,10 @@
   letter-spacing: 0.4px;
   margin-top: 18px;
   margin-bottom: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .news-card__button {

@@ -6,12 +6,12 @@ import GithubIcon from '../../images/github-icon.svg';
 
 function Footer() {
   return (
-    <section className='footer'>
+    <footer className='footer'>
       <div className='footer__content'>
         <p className='footer__copyright'>
           © 2021 Supersite, Powered by News API
         </p>
-        <div className='footer__nav'>
+        <nav className='footer__nav'>
           <div className='footer__links'>
             <NavLink to='/' className='footer__link'>
               Home
@@ -26,20 +26,28 @@ function Footer() {
             </a>
           </div>
           <div className='footer__social'>
-            <img
-              src={GithubIcon}
-              alt='Github icon'
-              className='footer__icon footer__icon_type_github'
-            />
-            <img
-              src={FacebookIcon}
-              alt='Facebook icon'
-              className='footer__icon footer__icon_type_facebook'
-            />
+            <a
+              href='https://github.com/cjmaret/news-explorer-frontend'
+              target='_blank'
+              rel='noreferrer'
+            >
+              <img
+                src={GithubIcon}
+                alt='Github icon'
+                className='footer__icon footer__icon_type_github'
+              />
+            </a>
+            <a href='https://www.facebook.com' target='_blank' rel='noreferrer'>
+              <img
+                src={FacebookIcon}
+                alt='Facebook icon'
+                className='footer__icon footer__icon_type_facebook'
+              />
+            </a>
           </div>
-        </div>
+        </nav>
       </div>
-    </section>
+    </footer>
   );
 }
 

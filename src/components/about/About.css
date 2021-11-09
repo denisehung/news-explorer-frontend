@@ -28,7 +28,7 @@
 }
 
 .about__paragraph {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   margin-top: 16px;
   font-size: 18px;
