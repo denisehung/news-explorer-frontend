@@ -76,12 +76,15 @@
 }
 
 @media screen and (max-width: 700px) {
-  .news-card-list {
+  .news-card-list_saved-articles {
     padding: 24px 16px 12px 16px;
   }
 
   .news-card-list__card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .news-card-list__card-grid_saved-articles {
     margin: 0;
   }
 
