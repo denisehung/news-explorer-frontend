@@ -8,6 +8,8 @@
   display: flex;
   justify-content: space-between;
   padding: 0 104px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 /* header__log-button sets the height, the other nav elements vertically center with line-height*/

@@ -1,10 +1,11 @@
 .saved {
-  padding: 40px 106px 56px 106px;
   border-top: 1px solid lightgray;
 }
 
 .saved__content {
   max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 106px 56px 106px;
 }
 
 .saved__title {
@@ -39,6 +40,10 @@
   .saved {
     margin-top: 65px;
     padding: 24px 40px 32px 40px;
+  }
+
+  .saved__content {
+    padding: 0;
   }
 
   .saved__heading {

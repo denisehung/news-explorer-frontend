@@ -1,15 +1,14 @@
 .news-card-list {
   background-color: #f5f6f7;
-  padding: 80px 0;
+  padding: 80px 104px;
 }
 
 .news-card-list_saved-articles {
-  padding: 62px 0;
+  padding: 62px 104px;
 }
 
 .news-card-list__container {
-  max-width: 1232px;
-  width: 85.55%;
+  max-width: 1440px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -63,7 +62,7 @@
 
 @media screen and (max-width: 768px) {
   .news-card-list {
-    padding: 40px 0;
+    padding: 40px 40px;
   }
 
   .news-card-list__card-grid {
@@ -77,11 +76,13 @@
 }
 
 @media screen and (max-width: 700px) {
-  .news-card-list__card-grid {
-    grid-template-columns: 1fr;
+  .news-card-list {
+    padding: 24px 16px 12px 16px;
   }
 
   .news-card-list__card-grid {
-    margin-top: 58px;
+    grid-template-columns: 1fr;
+    margin: 0;
   }
+
 }
