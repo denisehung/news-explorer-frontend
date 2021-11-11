@@ -21,7 +21,7 @@
 }
 
 .popup__form-container {
-  width: calc(430px - 72px);
+  width: 430px;
   border-radius: 10px;
   background-color: #fff;
   padding: 34px 36px 28px 36px;

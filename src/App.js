@@ -98,12 +98,13 @@ function App() {
             setSearchKeyword={setSearchKeyword}
             setIsNewsCardListOpen={setIsNewsCardListOpen}
           />
-          {hasResults && isNewsCardListOpen && (
-            <NewsCardList
+          <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
             />
-          )}
+         {/*{hasResults && isNewsCardListOpen && (
+            
+          )}*/}
           {/* <PreloaderAnimation /> */}
           {!hasResults && isNewsCardListOpen && <NoResults />}
           <About />
