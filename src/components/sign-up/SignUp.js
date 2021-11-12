@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PopupWithForm from '../popup-with-form/PopupWithForm';
 import FormValidator from '../../utils/formValidator';
 
-function SignUp({ isOpen, onClose, onRegisterSubmit, onSignInClick, name }) {
+function SignUp({ email, password, setEmail, setPassword, isOpen, onClose, onRegisterSubmit, onSignInClick, name }) {
   const { values, handleChange, errors, isValid, resetForm } = FormValidator();
 
   // Reset form when form is open

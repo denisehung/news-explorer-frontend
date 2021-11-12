@@ -10,6 +10,7 @@ import MenuLogoutIconBlack from '../../images/menu-logout-icon_type_black.svg';
 
 function Header({
   loggedIn,
+  currentUser,
   setLoggedIn,
   onSignInClick,
   setIsNewsCardListOpen,
@@ -66,7 +67,6 @@ function Header({
 
   // function to close menu by clicking outside
   function closeOnClickOutside(e) {
-    console.log(e.target);
     if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
       setIsMenuOpen(false);
     }
@@ -174,7 +174,7 @@ function Header({
             to=''
             onClick={logOut}
           >
-            <p className='header__log-button-username'>Colin</p>
+            <p className='header__log-button-username'>{currentUser?.name}</p>
             <img
               className='header__log-button-logout-icon'
               src={logoutIconDisplay}

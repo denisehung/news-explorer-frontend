@@ -38,9 +38,8 @@ function NewsCardList({ onSavedArticlesPage, loggedIn }) {
           }`}
         >
           {displayedCards.map((newscard) => (
-            <li className='news-card-list__card'>
+            <li className='news-card-list__card' key={newscard.id}>
               <NewsCard
-                key={newscard.id}
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
