@@ -1,7 +1,4 @@
-export const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://api.aloha.students.nomoreparties.site'
-    : 'http://localhost:3000';
+export const BASE_URL = (process.env.NODE_ENV === "production" ? "https://api.aloha.students.nomoreparties.site" : "http://localhost:3000");
 
 function returnRes(res) {
   if (res.ok) {
@@ -11,14 +8,14 @@ function returnRes(res) {
   }
 }
 
-export const register = (email, password) => {
+export const register = (email, password, name) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, name }),
   })
     .then((res) => {
       return returnRes(res);

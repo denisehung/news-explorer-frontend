@@ -12,7 +12,7 @@ function SignIn({ isOpen, onClose, onLogInSubmit, onSignUpClick }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onLogInSubmit();
+    onLogInSubmit(values.email, values.password);
   }
 
   return (
