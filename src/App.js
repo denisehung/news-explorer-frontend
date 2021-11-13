@@ -164,19 +164,20 @@ function App() {
               setSearchKeyword={setSearchKeyword}
               setIsNewsCardListOpen={setIsNewsCardListOpen}
             />
-            <NewsCardList
-              onSavedArticlesPage={onSavedArticlesPage}
-              loggedIn={loggedIn}
-            />
-            {/*{hasResults && isNewsCardListOpen && (
-            
-          )}*/}
+
+            {hasResults && isNewsCardListOpen && (
+              <NewsCardList
+                onSavedArticlesPage={onSavedArticlesPage}
+                loggedIn={loggedIn}
+              />
+            )}
+              
             {/* <PreloaderAnimation /> */}
             {!hasResults && isNewsCardListOpen && <NoResults />}
             <About />
           </Route>
           <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
-            <SavedNewsHeader />
+            <SavedNewsHeader currentUser={currentUser} />
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
