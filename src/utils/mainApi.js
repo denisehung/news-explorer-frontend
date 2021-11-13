@@ -36,7 +36,7 @@ class Api {
     });
   }
 
-  createArticle({ name, link }, token) {
+  saveArticle({ name, link }, token) {
     return fetch(this._baseUrl + '/articles', {
       headers: {
         authorization: `Bearer ${token}`,

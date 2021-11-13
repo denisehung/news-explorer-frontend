@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PopupWithForm from '../popup-with-form/PopupWithForm';
 import FormValidator from '../../utils/formValidator';
 
-function SignUp({ email, password, setEmail, setPassword, isOpen, onClose, onRegisterSubmit, onSignInClick, name }) {
+function SignUp({ isOpen, onClose, onRegisterSubmit, onSignInClick }) {
   const { values, handleChange, errors, isValid, resetForm } = FormValidator();
 
   // Reset form when form is open
@@ -12,7 +12,7 @@ function SignUp({ email, password, setEmail, setPassword, isOpen, onClose, onReg
 
   function handleSubmit(e) {
     e.preventDefault();
-    onRegisterSubmit();
+    onRegisterSubmit(values.email, values.password, values.name);
   }
 
   return (
@@ -50,7 +50,7 @@ function SignUp({ email, password, setEmail, setPassword, isOpen, onClose, onReg
         <input
           type='password'
           className='popup__input'
-          id={`password-input-${name}`}
+          id={`password-register`}
           autoComplete='on'
           placeholder='Enter password'
           name='password'
@@ -70,18 +70,18 @@ function SignUp({ email, password, setEmail, setPassword, isOpen, onClose, onReg
           Username
         </label>
         <input
-          type='username'
+          type='name'
           className='popup__input'
-          id='username-input'
+          id='username-register'
           autoComplete='on'
           placeholder='Enter username'
-          name='username'
-          value={values.username || ''}
+          name='name'
+          value={values.name || ''}
           onChange={handleChange}
           required
         />
         <p id='password-input-error' className='popup__error'>
-          {errors.username || ''}
+          {errors.name || ''}
         </p>
       </div>
 
