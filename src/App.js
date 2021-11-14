@@ -9,15 +9,14 @@ import SignIn from './components/sign-in/SignIn';
 import SignUp from './components/sign-up/SignUp';
 import NewsCardList from './components/news-card-list/NewsCardList';
 import SavedNewsHeader from './components/saved-news-header/SavedNewsHeader';
-import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
+// import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
 import NoResults from './components/no-results/NoResults';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import SuccessPopup from './components/success-popup/SuccessPopup';
 import CurrentUserContext from './contexts/CurrentUserContext';
-import MainApi from './utils/mainApi';
-import NewsApi from './utils/newsApi';
+import mainApi from './utils/mainApi';
+// import newsApi from './utils/newsApi';
 import * as auth from './utils/auth';
-import api from './utils/mainApi';
 
 function App() {
   const history = useHistory();
@@ -25,7 +24,7 @@ function App() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
@@ -36,6 +35,7 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
+  const [savedArticlesData, setSavedArticlesData] = useState([]);
 
   // Check user token
   useEffect(() => {
@@ -43,6 +43,7 @@ function App() {
       auth
         .checkToken(token)
         .then((res) => {
+
           setLoggedIn(true);
           history.push('/');
         })
@@ -52,11 +53,11 @@ function App() {
 
   // Get current user info
   useEffect(() => {
-    api
+    mainApi
       .getCurrentUser(token)
       .then((res) => {
         setCurrentUser(res.user);
-        console.log('USER', res.user);
+        // console.log('USER', res.user);
       })
       .catch((err) => console.log(err));
   }, [token]);
@@ -82,13 +83,23 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
+  // if search keyword, immediately set results to true
+  // useEffect(() => {
+  //   if (searchKeyword) {
+  //     setHasResults(true);
+  //   } else {
+  //     setHasResults(false);
+  //   }
+  // }, [searchKeyword]);
+
   useEffect(() => {
-    if (searchKeyword) {
-      setHasResults(true);
-    } else {
-      setHasResults(false);
-    }
-  }, [searchKeyword]);
+    mainApi
+      .getArticles()
+      .then((res) => {
+        setSavedArticlesData(res);
+      })
+      .catch((err) => console.log(err));
+  });
 
   function handleRegisterSubmit(email, password, name) {
     auth
@@ -113,6 +124,18 @@ function App() {
           setToken(data.token);
           handleLogin();
           history.push('/');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleSaveArticle(data) {
+    mainApi
+      .saveArticle(data, token)
+      .then((data) => {
+        if (data) {
+          console.log(data);
+          setSavedArticlesData(data);
         }
       })
       .catch((err) => console.log(err));
@@ -164,13 +187,13 @@ function App() {
               setSearchKeyword={setSearchKeyword}
               setIsNewsCardListOpen={setIsNewsCardListOpen}
             />
+            {/* {hasResults && isNewsCardListOpen && ( */}
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
+              handleSaveArticleClick={handleSaveArticle}
             />
-            {/*{hasResults && isNewsCardListOpen && (
-            
-          )}*/}
+            {/* )} */}
             {/* <PreloaderAnimation /> */}
             {!hasResults && isNewsCardListOpen && <NoResults />}
             <About />
@@ -180,6 +203,7 @@ function App() {
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
+              savedArticlesData={savedArticlesData}
             />
           </ProtectedRoute>
         </Switch>

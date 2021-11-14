@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './NewsCard.css';
 
-function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
+function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
   const [isSaved, setIsSaved] = useState(false);
 
-  function handleSave() {
-    setIsSaved(!isSaved);
-  }
+  // function handleSave() {
+  //   setIsSaved(!isSaved);
+  // }
 
   return (
     <div className='news-card'>
@@ -18,7 +18,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
             className={`news-card__button news-card__button_save ${
               loggedIn && isSaved ? 'news-card__button_save_active' : ''
             }`}
-            onClick={handleSave}
+            onClick={() => onSaveArticleClick(data)}
           ></button>
           {!loggedIn && (
             <div className='news-card__tag news-card__tag_type_tooltip'>

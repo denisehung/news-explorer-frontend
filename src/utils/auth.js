@@ -36,6 +36,7 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then((res) => {
+      console.log(res);
       return returnRes(res);
     })
     .then((data) => {
@@ -50,6 +51,7 @@ export const authorize = (email, password) => {
 };
 
 export const checkToken = (token) => {
+  console.log(token)
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {

@@ -3,7 +3,7 @@ import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
 
-function NewsCardList({ onSavedArticlesPage, loggedIn }) {
+function NewsCardList({ onSavedArticlesPage, loggedIn, savedArticlesData, handleSaveArticleClick }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
 
@@ -12,7 +12,7 @@ function NewsCardList({ onSavedArticlesPage, loggedIn }) {
     if (!onSavedArticlesPage) {
       setDisplayedCards(cardsArray.slice(0, 3));
     } else {
-      setDisplayedCards(cardsArray);
+      setDisplayedCards(savedArticlesData);
     }
   }, [onSavedArticlesPage]);
 
@@ -37,12 +37,13 @@ function NewsCardList({ onSavedArticlesPage, loggedIn }) {
             onSavedArticlesPage && 'news-card-list__card-grid_saved-articles'
           }`}
         >
-          {displayedCards.map((newscard) => (
+          {displayedCards?.map((newscard) => (
             <li className='news-card-list__card' key={newscard.id}>
               <NewsCard
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
+                onSaveArticleClick={handleSaveArticleClick}
               />
             </li>
           ))}

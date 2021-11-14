@@ -36,7 +36,8 @@ class Api {
     });
   }
 
-  saveArticle({ name, link }, token) {
+  saveArticle({ keyword, title, text, date, source, link, image }, token) {
+    console.log(token);
     return fetch(this._baseUrl + '/articles', {
       headers: {
         authorization: `Bearer ${token}`,
@@ -44,10 +45,16 @@ class Api {
       },
       method: 'POST',
       body: JSON.stringify({
-        name,
+        keyword,
+        title,
+        text,
+        date,
+        source,
         link,
+        image,
       }),
     }).then((res) => {
+      console.log(res);
       return this._returnRes(res);
     });
   }
