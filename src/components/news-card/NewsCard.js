@@ -8,9 +8,32 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
     setIsSaved(!isSaved);
   }
 
+  function convertDate() {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    let articleDate = data.publishedAt; // original date in ISOstring format
+    let newDate = new Date(articleDate.slice(0, 10)); // get date without time
+    let convertedDate = `${months[newDate.getMonth()]} ${newDate.getDate()},  ${newDate.getFullYear()}`; // convert date to correct format
+
+    return convertedDate;
+  }
+
   return (
     <div className='news-card'>
-      <img src={data.image} alt={data.alt} className='news-card__image' />
+      <img src={data.urlToImage} alt={data.title} className='news-card__image' />
 
       {!onSavedArticlesPage && (
         <>
@@ -41,10 +64,10 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
       )}
 
       <div className='news-card__details'>
-        <p className='news-card__date'>{data.date}</p>
+        <p className='news-card__date'>{convertDate()}</p>
         <h2 className='news-card__title'>{data.title}</h2>
         <p className='news-card__description'>{data.description}</p>
-        <p className='news-card__source'>{data.source}</p>
+        <p className='news-card__source'>{data.source.name}</p>
       </div>
     </div>
   );

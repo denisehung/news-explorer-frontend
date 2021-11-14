@@ -3,22 +3,22 @@ import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
 import cardsArray from '../../arrays/cardsArray';
 
-function NewsCardList({ onSavedArticlesPage, loggedIn }) {
+function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
 
   // start with 3 news cards (on saved-articles, show all cards)
   React.useEffect(() => {
     if (!onSavedArticlesPage) {
-      setDisplayedCards(cardsArray.slice(0, 3));
+      setDisplayedCards(cards.slice(0, 3));
     } else {
-      setDisplayedCards(cardsArray);
+      setDisplayedCards(cards);
     }
-  }, [onSavedArticlesPage]);
+  }, [cards, onSavedArticlesPage]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
-    setDisplayedCards(cardsArray.slice(0, next + 3));
+    setDisplayedCards(cards.slice(0, next + 3));
     setNext(next + 3);
   }
 
@@ -37,8 +37,8 @@ function NewsCardList({ onSavedArticlesPage, loggedIn }) {
             onSavedArticlesPage && 'news-card-list__card-grid_saved-articles'
           }`}
         >
-          {displayedCards.map((newscard) => (
-            <li className='news-card-list__card' key={newscard.id}>
+          {displayedCards.map((newscard, index) => (
+            <li className='news-card-list__card' key={index}>
               <NewsCard
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
