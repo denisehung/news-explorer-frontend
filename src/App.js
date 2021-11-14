@@ -25,7 +25,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
@@ -83,15 +83,14 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
-  /*
-  useEffect(() => {
-    if (searchKeyword) {
-      setHasResults(true);
-    } else {
-      setHasResults(false);
-    }
-  }, [searchKeyword]);
-  */
+  // if search keyword, immediately set results to true
+  // useEffect(() => {
+  //   if (searchKeyword) {
+  //     setHasResults(true);
+  //   } else {
+  //     setHasResults(false);
+  //   }
+  // }, [searchKeyword]);
 
   function handleRegisterSubmit(email, password, name) {
     auth
@@ -221,6 +220,7 @@ function App() {
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
               savedArticlesData={savedArticlesData}
+              setSavedArticlesData={setSavedArticlesData}
             />
           </ProtectedRoute>
         </Switch>

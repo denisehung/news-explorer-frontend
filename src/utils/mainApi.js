@@ -37,7 +37,6 @@ class Api {
   }
 
   saveArticle({ keyword, title, text, date, source, link, image }, token) {
-    console.log(token);
     return fetch(this._baseUrl + '/articles', {
       headers: {
         authorization: `Bearer ${token}`,
