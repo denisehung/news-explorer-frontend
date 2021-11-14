@@ -14,19 +14,20 @@ import NoResults from './components/no-results/NoResults';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import SuccessPopup from './components/success-popup/SuccessPopup';
 import CurrentUserContext from './contexts/CurrentUserContext';
-import MainApi from './utils/mainApi';
-import NewsApi from './utils/newsApi';
+// import MainApi from './utils/mainApi';
+import newsApi from './utils/newsApi';
 import * as auth from './utils/auth';
 import api from './utils/mainApi';
 
 function App() {
   const history = useHistory();
-  const [token, setToken] = React.useState(localStorage.getItem('token'));
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
   const [currentUser, setCurrentUser] = useState({});
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -82,6 +83,7 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
+  /*
   useEffect(() => {
     if (searchKeyword) {
       setHasResults(true);
@@ -89,6 +91,7 @@ function App() {
       setHasResults(false);
     }
   }, [searchKeyword]);
+  */
 
   function handleRegisterSubmit(email, password, name) {
     auth
@@ -116,6 +119,27 @@ function App() {
         }
       })
       .catch((err) => console.log(err));
+  }
+
+  function handleSearchSubmit(keyword) {
+    setIsLoading(true);
+    newsApi
+      .searchArticles(keyword)
+      .then((res) => {
+        setCards(res);
+        console.log('CARDS', res);
+        if (res.length === 0) {
+          setHasResults(false);
+        } else {
+          setHasResults(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleLogin() {
@@ -160,6 +184,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <SearchHero
+              onSearch={handleSearchSubmit}
               searchKeyword={searchKeyword}
               setSearchKeyword={setSearchKeyword}
               setIsNewsCardListOpen={setIsNewsCardListOpen}
@@ -169,11 +194,12 @@ function App() {
               <NewsCardList
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
+                cards={cards}
               />
             )}
-              
-            {/* <PreloaderAnimation /> */}
-            {!hasResults && isNewsCardListOpen && <NoResults />}
+
+            {isLoading && <PreloaderAnimation />}
+            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
             <About />
           </Route>
           <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
