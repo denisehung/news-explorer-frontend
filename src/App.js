@@ -14,7 +14,7 @@ import NoResults from './components/no-results/NoResults';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import SuccessPopup from './components/success-popup/SuccessPopup';
 import CurrentUserContext from './contexts/CurrentUserContext';
-import MainApi from './utils/mainApi';
+// import MainApi from './utils/mainApi';
 import newsApi from './utils/newsApi';
 import * as auth from './utils/auth';
 import api from './utils/mainApi';
@@ -127,17 +127,19 @@ function App() {
       .searchArticles(keyword)
       .then((res) => {
         setCards(res);
-        console.log('CARDS', res)
+        console.log('CARDS', res);
         if (res.length === 0) {
           setHasResults(false);
         } else {
           setHasResults(true);
         }
       })
-      .catch((err) => {console.log(err)})
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         setIsLoading(false);
-    });
+      });
   }
 
   function handleLogin() {
@@ -195,9 +197,9 @@ function App() {
                 cards={cards}
               />
             )}
-              
+
             {isLoading && <PreloaderAnimation />}
-            {!hasResults && isNewsCardListOpen && <NoResults />}
+            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
             <About />
           </Route>
           <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
