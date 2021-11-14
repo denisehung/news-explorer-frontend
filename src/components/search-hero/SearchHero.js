@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './SearchHero.css';
 
 function SearchHero({
+  searchKeyword,
   setSearchKeyword,
   setIsNewsCardListOpen,
+  onSearch
 }) {
 
   const [formInputValue, setFormInputValue] = useState('');
@@ -17,7 +19,8 @@ function SearchHero({
     e.preventDefault();
     //api call to PUT the keyword into the filter...
     setIsNewsCardListOpen(true);
-    setFormInputValue('');
+    onSearch(searchKeyword);
+    //setFormInputValue('');
   }
 
   return (
