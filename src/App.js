@@ -209,7 +209,6 @@ function App() {
                 handleSaveArticleClick={handleSaveArticle}
               />
             )}
-
             {isLoading && <PreloaderAnimation />}
             {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
             <About />
@@ -221,6 +220,7 @@ function App() {
               loggedIn={loggedIn}
               savedArticlesData={savedArticlesData}
               setSavedArticlesData={setSavedArticlesData}
+              token={token}
             />
           </ProtectedRoute>
         </Switch>

@@ -10,18 +10,21 @@ function NewsCardList({
   savedArticlesData,
   setSavedArticlesData,
   handleSaveArticleClick,
+  token
 }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
 
   useEffect(() => {
     mainApi
-      .getArticles()
+      .getArticles(token)
       .then((res) => {
+        setDisplayedCards(res);
         setSavedArticlesData(res);
+        console.log(res);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   // start with 3 news cards (on saved-articles, show all cards)
   useEffect(() => {
@@ -60,7 +63,7 @@ function NewsCardList({
       <div className='news-card-list__container'>
         <h3 className='news-card-list__title'>Search results</h3>
         <ul className='news-card-list__card-grid'>
-          {displayedCards?.map((newscard) => (
+          {/* {displayedCards?.map((newscard) => (
             <li className='news-card-list__card' key={newscard.id}>
               <NewsCard
                 data={newscard}
@@ -69,7 +72,7 @@ function NewsCardList({
                 onSaveArticleClick={handleSaveArticleClick}
               />
             </li>
-          ))}
+          ))} */}
         </ul>
         <button
           className='news-card-list__show-more-button'
