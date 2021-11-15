@@ -7,6 +7,7 @@ import mainApi from '../../utils/mainApi';
 function NewsCardList({
   onSavedArticlesPage,
   loggedIn,
+  cards,
   savedArticlesData,
   setSavedArticlesData,
   handleSaveArticleClick,
@@ -29,15 +30,15 @@ function NewsCardList({
   // start with 3 news cards (on saved-articles, show all cards)
   useEffect(() => {
     if (!onSavedArticlesPage) {
-      setDisplayedCards(cardsArray.slice(0, 3));
+      setDisplayedCards(cards.slice(0, 3));
     } else {
       setDisplayedCards(savedArticlesData);
     }
-  }, [onSavedArticlesPage]);
+  }, [cards, onSavedArticlesPage]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
-    setDisplayedCards(cardsArray.slice(0, next + 3));
+    setDisplayedCards(cards.slice(0, next + 3));
     setNext(next + 3);
   }
 
