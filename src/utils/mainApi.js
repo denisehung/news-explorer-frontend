@@ -36,7 +36,9 @@ class Api {
     });
   }
 
-  saveArticle({ keyword, title, text, date, source, link, image }, token) {
+  saveArticle(data, searchKeyword, token) {
+    const {title, description, publishedAt, source, url, urlToImage } = data;
+    const keyword = searchKeyword;
     return fetch(this._baseUrl + '/articles', {
       headers: {
         authorization: `Bearer ${token}`,
@@ -46,14 +48,13 @@ class Api {
       body: JSON.stringify({
         keyword,
         title,
-        text,
-        date,
+        description,
+        publishedAt,
         source,
-        link,
-        image,
+        url,
+        urlToImage,
       }),
     }).then((res) => {
-      console.log(res);
       return this._returnRes(res);
     });
   }

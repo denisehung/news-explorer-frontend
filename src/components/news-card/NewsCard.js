@@ -25,7 +25,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
     ];
 
     let articleDate = data.publishedAt; // original date in ISOstring format
-    let newDate = new Date(articleDate.slice(0, 10)); // get date without time
+    let newDate = new Date(articleDate?.slice(0, 10)); // get date without time
     let convertedDate = `${months[newDate.getMonth()]} ${newDate.getDate()},  ${newDate.getFullYear()}`; // convert date to correct format
 
     return convertedDate;

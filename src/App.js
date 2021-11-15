@@ -57,7 +57,6 @@ function App() {
       .getCurrentUser(token)
       .then((res) => {
         setCurrentUser(res.user);
-        // console.log('USER', res.user);
       })
       .catch((err) => console.log(err));
   }, [token]);
@@ -122,7 +121,7 @@ function App() {
 
   function handleSaveArticle(data) {
     mainApi
-      .saveArticle(data, token)
+      .saveArticle(data, searchKeyword, token)
       .then((data) => {
         if (data) {
           console.log(data);
@@ -138,7 +137,6 @@ function App() {
       .searchArticles(keyword)
       .then((res) => {
         setCards(res);
-        console.log('CARDS', res);
         if (res.length === 0) {
           setHasResults(false);
         } else {
