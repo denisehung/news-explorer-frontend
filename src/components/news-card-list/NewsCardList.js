@@ -5,7 +5,7 @@ import NewsCard from '../news-card/NewsCard';
 function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
-  const [isButtonVisible, setIsButtonVisible] = useState(false);
+  const [isButtonHidden, setIsButtonHidden] = useState(false);
 
   // start with 3 news cards (on saved-articles, show all cards)
   useEffect(() => {
@@ -16,17 +16,17 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
     }
   }, [cards, onSavedArticlesPage]);
 
-// only display 'show more button' while number of displayed cards is smaller than total cards
+  // only display 'show more button' while number of displayed cards is smaller than total cards
   useEffect(() => {
-      if(displayedCards.length < cards.length) {
-        setIsButtonVisible(true);
-      } else {
-        setIsButtonVisible(false);
-      }
-    }, [displayedCards.length, cards.length])
+    if (displayedCards.length < cards.length) {
+      setIsButtonHidden(false);
+    } else {
+      setIsButtonHidden(true);
+    }
+  }, [displayedCards.length, cards.length]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
-  function handleShowMoreCards() {  
+  function handleShowMoreCards() {
     setDisplayedCards(cards.slice(0, next + 3));
     setNext(next + 3);
   }
@@ -57,7 +57,7 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
             </li>
           ))}
         </ul>
-        {!onSavedArticlesPage && isButtonVisible && (
+        {!onSavedArticlesPage && !isButtonHidden && (
           <button
             className={`news-card-list__show-more-button`}
             onClick={handleShowMoreCards}
