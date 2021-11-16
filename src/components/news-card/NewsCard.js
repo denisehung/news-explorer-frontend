@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./NewsCard.css";
+import React, { useState } from 'react';
+import './NewsCard.css';
 
 function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
   const [isSaved, setIsSaved] = useState(false);
@@ -10,18 +10,18 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
 
   function convertDate() {
     const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
 
     let articleDate = data.publishedAt; // original date in ISOstring format
@@ -39,7 +39,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn }) {
         <>
           <button
             className={`news-card__button news-card__button_save ${
-              loggedIn && isSaved ? "news-card__button_save_active" : ""
+              loggedIn && isSaved ? 'news-card__button_save_active' : ''
             }`}
             onClick={handleSave}
           ></button>
