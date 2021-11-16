@@ -19,8 +19,8 @@ function NewsCardList({
     mainApi
       .getArticles(token)
       .then((res) => {
-        setDisplayedCards(res);
-        setSavedArticlesData(res);
+        setDisplayedCards(res.articles);
+        setSavedArticlesData(res.articles);
       })
       .catch((err) => console.log(err));
   }, []);

@@ -124,7 +124,6 @@ function App() {
       .saveArticle(data, searchKeyword, token)
       .then((data) => {
         if (data) {
-          console.log(data);
           setSavedArticlesData(data);
         }
       })

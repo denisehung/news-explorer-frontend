@@ -36,7 +36,6 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then((res) => {
-      console.log(res);
       return returnRes(res);
     })
     .then((data) => {

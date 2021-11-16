@@ -37,7 +37,8 @@ class Api {
   }
 
   saveArticle(data, searchKeyword, token) {
-    const {title, description, publishedAt, source, url, urlToImage } = data;
+    const { title, description: text, publishedAt: date, url: link, urlToImage: image } = data;
+    const source = data.source.name;
     const keyword = searchKeyword;
     return fetch(this._baseUrl + '/articles', {
       headers: {
@@ -48,11 +49,11 @@ class Api {
       body: JSON.stringify({
         keyword,
         title,
-        description,
-        publishedAt,
+        text,
+        date,
         source,
-        url,
-        urlToImage,
+        link,
+        image,
       }),
     }).then((res) => {
       return this._returnRes(res);
