@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
-import cardsArray from '../../arrays/cardsArray';
 
 function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
   const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   // start with 3 news cards (on saved-articles, show all cards)
-  React.useEffect(() => {
+  useEffect(() => {
     if (!onSavedArticlesPage) {
       setDisplayedCards(cards.slice(0, 3));
     } else {
@@ -16,8 +16,17 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
     }
   }, [cards, onSavedArticlesPage]);
 
+// only display 'show more button' while number of displayed cards is smaller than total cards
+  useEffect(() => {
+      if(displayedCards.length < cards.length) {
+        setIsButtonVisible(true);
+      } else {
+        setIsButtonVisible(false);
+      }
+    }, [displayedCards.length, cards.length])
+
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
-  function handleShowMoreCards() {
+  function handleShowMoreCards() {  
     setDisplayedCards(cards.slice(0, next + 3));
     setNext(next + 3);
   }
@@ -28,9 +37,9 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
         onSavedArticlesPage && 'news-card-list_saved-articles'
       }`}
     >
-      <div className='news-card-list__container'>
+      <div className="news-card-list__container">
         {!onSavedArticlesPage && (
-          <h3 className='news-card-list__title'>Search results</h3>
+          <h3 className="news-card-list__title">Search results</h3>
         )}
         <ul
           className={`news-card-list__card-grid ${
@@ -38,18 +47,19 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
           }`}
         >
           {displayedCards.map((newscard, index) => (
-            <li className='news-card-list__card' key={index}>
+            <li className="news-card-list__card" key={index}>
               <NewsCard
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
+                image={newscard.urlToImage}
               />
             </li>
           ))}
         </ul>
-        {!onSavedArticlesPage && (
+        {!onSavedArticlesPage && isButtonVisible && (
           <button
-            className='news-card-list__show-more-button'
+            className={`news-card-list__show-more-button`}
             onClick={handleShowMoreCards}
           >
             Show more

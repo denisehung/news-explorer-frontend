@@ -83,16 +83,6 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
-  /*
-  useEffect(() => {
-    if (searchKeyword) {
-      setHasResults(true);
-    } else {
-      setHasResults(false);
-    }
-  }, [searchKeyword]);
-  */
-
   function handleRegisterSubmit(email, password, name) {
     auth
       .register(email, password, name)
