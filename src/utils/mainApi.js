@@ -37,9 +37,13 @@ class Api {
   }
 
   saveArticle(data, searchKeyword, token) {
+    // get most keys from data
     const { title, description: text, publishedAt: date, url: link, urlToImage: image } = data;
+    // get source from data object
     const source = data.source.name;
-    const keyword = searchKeyword;
+    // grab keyword with the first letter capitalized
+    const keyword = searchKeyword.charAt(0).toUpperCase() + searchKeyword.slice(1);
+    
     return fetch(this._baseUrl + '/articles', {
       headers: {
         authorization: `Bearer ${token}`,
