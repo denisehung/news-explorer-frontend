@@ -9,21 +9,12 @@ function NewsCardList({
   cards,
   savedArticlesData,
   setSavedArticlesData,
+  displayedCards,
+  setDisplayedCards,
   handleSaveArticleClick,
   token,
 }) {
-  const [displayedCards, setDisplayedCards] = useState([]);
   const [next, setNext] = useState(3);
-
-  useEffect(() => {
-    mainApi
-      .getArticles(token)
-      .then((res) => {
-        setDisplayedCards(res.articles);
-        setSavedArticlesData(res.articles);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   // start with 3 news cards (on saved-articles, show all cards)
   useEffect(() => {

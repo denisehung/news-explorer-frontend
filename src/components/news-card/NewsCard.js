@@ -72,7 +72,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
         <p className='news-card__date'>{convertDate()}</p>
         <h2 className='news-card__title'>{data.title}</h2>
         <p className='news-card__description'>{data.description}</p>
-        <p className='news-card__source'>{data.source.name}</p>
+        <p className='news-card__source'>{data.source?.name}</p>
       </div>
     </div>
   );

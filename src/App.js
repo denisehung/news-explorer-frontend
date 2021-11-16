@@ -37,6 +37,7 @@ function App() {
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
   const [savedArticlesData, setSavedArticlesData] = useState([]);
+  const [displayedCards, setDisplayedCards] = useState([]);
 
   // Check user token
   useEffect(() => {
@@ -60,6 +61,17 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, [token]);
+
+  // get saved-articles to compare with bookmark POST request
+  useEffect(() => {
+    mainApi
+      .getArticles(token)
+      .then((res) => {
+        setDisplayedCards(res.articles);
+        setSavedArticlesData(res.articles);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   //determine if user is on saved-articles page
   useEffect(() => {
@@ -120,14 +132,18 @@ function App() {
   }
 
   function handleSaveArticle(data) {
-    mainApi
-      .saveArticle(data, searchKeyword, token)
-      .then((data) => {
-        if (data) {
-          setSavedArticlesData(data);
-        }
-      })
-      .catch((err) => console.log(err));
+    if (!savedArticlesData.find((obj) => obj.title === data.title)) {
+      mainApi
+        .saveArticle(data, searchKeyword, token)
+        .then((data) => {
+          if (data) {
+            setSavedArticlesData(data);
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log('thats already saved!');
+    }
   }
 
   function handleSearchSubmit(keyword) {
@@ -204,6 +220,8 @@ function App() {
                 loggedIn={loggedIn}
                 cards={cards}
                 handleSaveArticleClick={handleSaveArticle}
+                displayedCards={displayedCards}
+                setDisplayedCards={setDisplayedCards}
               />
             )}
             {isLoading && <PreloaderAnimation />}
@@ -218,6 +236,8 @@ function App() {
               savedArticlesData={savedArticlesData}
               setSavedArticlesData={setSavedArticlesData}
               token={token}
+              displayedCards={displayedCards}
+              setDisplayedCards={setDisplayedCards}
             />
           </ProtectedRoute>
         </Switch>

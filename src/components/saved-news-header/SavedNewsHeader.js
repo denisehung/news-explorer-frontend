@@ -1,6 +1,5 @@
 import React from 'react';
 import './SavedNewsHeader.css';
-import cardsArray from '../../arrays/cardsArray';
 
 function SavedNewsHeader({ currentUser }) {
   return (
@@ -8,7 +7,7 @@ function SavedNewsHeader({ currentUser }) {
       <div className='saved__content'>
         <p className='saved__title'>Saved articles</p>
         <h1 className='saved__heading'>
-          {currentUser?.name}, you have {cardsArray.length} saved articles
+          {currentUser?.name}, you have a ton of saved articles
         </h1>
         <p className='saved__keywords'>
           By keywords:{' '}
