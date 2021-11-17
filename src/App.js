@@ -37,6 +37,7 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
+  const [hasError, setHasError] = React.useState(false);
 
   // Check user token
   useEffect(() => {
@@ -92,9 +93,12 @@ function App() {
           handleRegister();
         } else {
           setIsRegistered(false);
+          setHasError(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleLoginSubmit(email, password) {
@@ -108,7 +112,10 @@ function App() {
           history.push('/');
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setHasError(true);
+      });
   }
 
   function handleSearchSubmit(keyword) {
@@ -133,22 +140,26 @@ function App() {
   }
 
   function handleLogin() {
+    setHasError(false);
     setLoggedIn(true);
     setIsSignInOpen(false);
   }
 
   function handleRegister() {
+    setHasError(false);
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(true);
   }
 
   function handleSignInClick() {
+    setHasError(false);
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(false);
   }
 
   function handleSignUpClick() {
+    setHasError(false);
     setIsSignUpOpen(true);
     setIsSignInOpen(false);
   }
@@ -161,7 +172,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className='page'>
+      <div className="page">
         <Header
           loggedIn={loggedIn}
           currentUser={currentUser}
@@ -172,7 +183,7 @@ function App() {
           onSavedArticlesPage={onSavedArticlesPage}
         />
         <Switch>
-          <Route exact path='/'>
+          <Route exact path="/">
             <SearchHero
               onSearch={handleSearchSubmit}
               searchKeyword={searchKeyword}
@@ -192,7 +203,7 @@ function App() {
             {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
             <About />
           </Route>
-          <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
+          <ProtectedRoute path="/saved-articles" loggedIn={loggedIn}>
             <SavedNewsHeader currentUser={currentUser} />
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
@@ -209,6 +220,7 @@ function App() {
           onClose={closeAllPopups}
           onSignUpClick={handleSignUpClick}
           onLogInSubmit={handleLoginSubmit}
+          hasError={hasError}
         />
         <SignUp
           email={email}
@@ -219,6 +231,7 @@ function App() {
           onClose={closeAllPopups}
           onSignInClick={handleSignInClick}
           onRegisterSubmit={handleRegisterSubmit}
+          hasError={hasError}
         />
         <SuccessPopup
           isOpen={isSuccessPopupOpen}

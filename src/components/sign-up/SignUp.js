@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PopupWithForm from '../popup-with-form/PopupWithForm';
 import FormValidator from '../../utils/formValidator';
 
-function SignUp({ isOpen, onClose, onRegisterSubmit, onSignInClick }) {
+function SignUp({ isOpen, onClose, onRegisterSubmit, onSignInClick, hasError }) {
   const { values, handleChange, errors, isValid, resetForm } = FormValidator();
 
   // Reset form when form is open
@@ -84,7 +84,7 @@ function SignUp({ isOpen, onClose, onRegisterSubmit, onSignInClick }) {
           {errors.name || ''}
         </p>
       </div>
-
+      {hasError && <p className='popup__error popup__error_type_form'>This email is unavailable</p>}
       <button
         className={`popup__submit-button ${
           isValid ? 'popup__submit-button_active' : ''
