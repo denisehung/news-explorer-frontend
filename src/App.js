@@ -23,8 +23,6 @@ function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +35,7 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
-  const [hasError, setHasError] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // Check user token
   useEffect(() => {
@@ -133,6 +131,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setHasError(true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -200,7 +199,7 @@ function App() {
             )}
 
             {isLoading && <PreloaderAnimation />}
-            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
+            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults hasError={hasError}/>}
             <About />
           </Route>
           <ProtectedRoute path="/saved-articles" loggedIn={loggedIn}>
@@ -212,10 +211,6 @@ function App() {
           </ProtectedRoute>
         </Switch>
         <SignIn
-          email={email}
-          password={password}
-          setEmail={setEmail}
-          setPassword={setPassword}
           isOpen={isSignInOpen}
           onClose={closeAllPopups}
           onSignUpClick={handleSignUpClick}
@@ -223,10 +218,6 @@ function App() {
           hasError={hasError}
         />
         <SignUp
-          email={email}
-          password={password}
-          setEmail={setEmail}
-          setPassword={setPassword}
           isOpen={isSignUpOpen}
           onClose={closeAllPopups}
           onSignInClick={handleSignInClick}
