@@ -137,13 +137,26 @@ function App() {
         .saveArticle(data, searchKeyword, token)
         .then((data) => {
           if (data) {
-            setSavedArticlesData(data);
+            setSavedArticlesData(savedArticles => [...savedArticles, data.article]);
+            console.log('article saved!');
           }
         })
         .catch((err) => console.log(err));
     } else {
       console.log('thats already saved!');
     }
+  }
+
+  function handleDeleteArticle(data) {
+    // if(card exists) {
+    mainApi
+      .deleteArticle(data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    // }
   }
 
   function handleSearchSubmit(keyword) {
@@ -229,7 +242,10 @@ function App() {
             <About />
           </Route>
           <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
-            <SavedNewsHeader currentUser={currentUser} savedArticleData={savedArticlesData} />
+            <SavedNewsHeader
+              currentUser={currentUser}
+              savedArticlesData={savedArticlesData}
+            />
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
