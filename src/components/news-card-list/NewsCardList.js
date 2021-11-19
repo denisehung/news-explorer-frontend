@@ -24,7 +24,7 @@ function NewsCardList({
     } else {
       setDisplayedCards(savedArticlesData);
     }
-  }, [cards, onSavedArticlesPage, onDeleteArticleClick]);
+  }, [cards, onSavedArticlesPage, savedArticlesData]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
