@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
+import mainApi from '../../utils/mainApi';
 
-function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
-  const [displayedCards, setDisplayedCards] = useState([]);
+function NewsCardList({
+  onSavedArticlesPage,
+  loggedIn,
+  cards,
+  savedArticlesData,
+  setSavedArticlesData,
+  displayedCards,
+  setDisplayedCards,
+  handleSaveArticleClick,
+  token,
+}) {
   const [next, setNext] = useState(3);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
 
   // start with 3 news cards (on saved-articles, show all cards)
   useEffect(() => {
     if (!onSavedArticlesPage) {
-      setDisplayedCards(cards.slice(0, 3));
+      setDisplayedCards(cards?.slice(0, 3));
     } else {
-      setDisplayedCards(cards);
+      setDisplayedCards(savedArticlesData);
     }
   }, [cards, onSavedArticlesPage]);
 
@@ -48,11 +58,39 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
         >
           {displayedCards.map((newscard, index) => (
             <li className="news-card-list__card" key={index}>
+            
+  return onSavedArticlesPage ? (
+    <section className='news-card-list news-card-list_saved-articles'>
+      <div className='news-card-list__container'>
+        <ul className='news-card-list__card-grid news-card-list__card-grid_saved-articles'>
+          {displayedCards?.map((newscard) => (
+            <li className='news-card-list__card' key={newscard._id}>
+              <NewsCard
+                data={newscard}
+                onSavedArticlesPage={onSavedArticlesPage}
+                loggedIn={loggedIn}
+                // onSaveArticleClick={handleSaveArticleClick}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ) : (
+    <section className='news-card-list'>
+      <div className='news-card-list__container'>
+        <h3 className='news-card-list__title'>Search results</h3>
+        <ul className='news-card-list__card-grid'>
+          {displayedCards?.map((newscard, index) => (
+            <li className='news-card-list__card' key={index}>
+
               <NewsCard
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 image={newscard.urlToImage}
+                savedArticlesData={savedArticlesData}
+                onSaveArticleClick={handleSaveArticleClick}
               />
             </li>
           ))}
@@ -65,6 +103,12 @@ function NewsCardList({ cards, onSavedArticlesPage, loggedIn }) {
             Show more
           </button>
         )}
+        <button
+          className='news-card-list__show-more-button'
+          onClick={handleShowMoreCards}
+        >
+          Show more
+        </button>
       </div>
     </section>
   );

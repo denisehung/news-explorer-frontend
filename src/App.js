@@ -14,10 +14,9 @@ import NoResults from './components/no-results/NoResults';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import SuccessPopup from './components/success-popup/SuccessPopup';
 import CurrentUserContext from './contexts/CurrentUserContext';
-// import MainApi from './utils/mainApi';
+import mainApi from './utils/mainApi';
 import newsApi from './utils/newsApi';
 import * as auth from './utils/auth';
-import api from './utils/mainApi';
 
 function App() {
   const history = useHistory();
@@ -26,7 +25,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
@@ -37,6 +36,8 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
+  const [savedArticlesData, setSavedArticlesData] = useState([]);
+  const [displayedCards, setDisplayedCards] = useState([]);
 
   // Check user token
   useEffect(() => {
@@ -53,14 +54,24 @@ function App() {
 
   // Get current user info
   useEffect(() => {
-    api
+    mainApi
       .getCurrentUser(token)
       .then((res) => {
         setCurrentUser(res.user);
-        console.log('USER', res.user);
       })
       .catch((err) => console.log(err));
   }, [token]);
+
+  // get saved-articles to compare with bookmark POST request
+  useEffect(() => {
+    mainApi
+      .getArticles(token)
+      .then((res) => {
+        setDisplayedCards(res.articles);
+        setSavedArticlesData(res.articles);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   //determine if user is on saved-articles page
   useEffect(() => {
@@ -82,6 +93,16 @@ function App() {
     document.addEventListener('keydown', closeByEscape);
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
+
+
+  // if search keyword, immediately set results to true
+  // useEffect(() => {
+  //   if (searchKeyword) {
+  //     setHasResults(true);
+  //   } else {
+  //     setHasResults(false);
+  //   }
+  // }, [searchKeyword]);
 
   function handleRegisterSubmit(email, password, name) {
     auth
@@ -111,13 +132,40 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  function handleSaveArticle(data) {
+    if (!savedArticlesData.find((obj) => obj.title === data.title)) {
+      mainApi
+        .saveArticle(data, searchKeyword, token)
+        .then((data) => {
+          if (data) {
+            setSavedArticlesData(savedArticles => [...savedArticles, data.article]);
+            console.log('article saved!');
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log('thats already saved!');
+    }
+  }
+
+  function handleDeleteArticle(data) {
+    // if(card exists) {
+    mainApi
+      .deleteArticle(data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    // }
+  }
+
   function handleSearchSubmit(keyword) {
     setIsLoading(true);
     newsApi
       .searchArticles(keyword)
       .then((res) => {
         setCards(res);
-        console.log('CARDS', res);
         if (res.length === 0) {
           setHasResults(false);
         } else {
@@ -185,18 +233,28 @@ function App() {
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 cards={cards}
+                handleSaveArticleClick={handleSaveArticle}
+                displayedCards={displayedCards}
+                setDisplayedCards={setDisplayedCards}
               />
             )}
-
             {isLoading && <PreloaderAnimation />}
             {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
             <About />
           </Route>
           <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
-            <SavedNewsHeader currentUser={currentUser} />
+            <SavedNewsHeader
+              currentUser={currentUser}
+              savedArticlesData={savedArticlesData}
+            />
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
+              savedArticlesData={savedArticlesData}
+              setSavedArticlesData={setSavedArticlesData}
+              token={token}
+              displayedCards={displayedCards}
+              setDisplayedCards={setDisplayedCards}
             />
           </ProtectedRoute>
         </Switch>
