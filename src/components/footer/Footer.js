@@ -6,42 +6,42 @@ import GithubIcon from '../../images/github-icon.svg';
 
 function Footer() {
   return (
-    <footer className='footer'>
-      <div className='footer__content'>
-        <p className='footer__copyright'>
+    <footer className="footer">
+      <div className="footer__content">
+        <p className="footer__copyright">
           © 2021 Supersite, Powered by News API
         </p>
-        <nav className='footer__nav'>
-          <div className='footer__links'>
-            <NavLink to='/' className='footer__link'>
+        <nav className="footer__nav">
+          <div className="footer__links">
+            <NavLink to="/" className="footer__link">
               Home
             </NavLink>
             <a
-              href='https://practicum.yandex.com/profile/web/'
-              className='footer__link'
-              target='_blank'
-              rel='noreferrer'
+              href="https://practicum.yandex.com/profile/web/"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
             >
               Practicum by Yandex
             </a>
           </div>
-          <div className='footer__social'>
+          <div className="footer__social">
             <a
-              href='https://github.com/cjmaret/news-explorer-frontend'
-              target='_blank'
-              rel='noreferrer'
+              href="https://github.com/cjmaret/news-explorer-frontend"
+              target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={GithubIcon}
-                alt='Github icon'
-                className='footer__icon footer__icon_type_github'
+                alt="Github icon"
+                className="footer__icon footer__icon_type_github"
               />
             </a>
-            <a href='https://www.facebook.com' target='_blank' rel='noreferrer'>
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
               <img
                 src={FacebookIcon}
-                alt='Facebook icon'
-                className='footer__icon footer__icon_type_facebook'
+                alt="Facebook icon"
+                className="footer__icon footer__icon_type_facebook"
               />
             </a>
           </div>

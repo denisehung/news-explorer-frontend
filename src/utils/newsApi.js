@@ -1,5 +1,9 @@
 const today = new Date();
-const weekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
+const weekAgo = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate() - 7
+);
 const apiKey = '89646cd537e44c1685691caa70a539b4';
 
 class NewsApi {
@@ -17,7 +21,9 @@ class NewsApi {
 
   searchArticles(keyword) {
     return fetch(
-      `${this._baseUrl}?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&sortBy=relevancy&pageSize=10&apiKey=${apiKey}`
+      `${
+        this._baseUrl
+      }?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&language=en&sortBy=relevancy&pageSize=100&apiKey=${apiKey}`
     )
       .then((res) => this._returnRes(res))
       .then((res) => res.articles);
