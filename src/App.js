@@ -186,7 +186,7 @@ function App() {
 
   function handleLogOut() {
     setLoggedIn(false);
-    setToken(localStorage.removeItem('token'));
+    localStorage.removeItem('token');
     history.push('/');
   }
 
