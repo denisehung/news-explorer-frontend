@@ -61,7 +61,10 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
         className={`news-card__button news-card__button_save ${
           loggedIn && isSaved ? 'news-card__button_save_active' : ''
         }`}
-        onClick={() => onSaveArticleClick(data)}
+        onClick={() => {
+          onSaveArticleClick(data)
+          setIsSaved(true);
+        }}
       ></button>
       {!loggedIn && (
         <div className='news-card__tag news-card__tag_type_tooltip'>
