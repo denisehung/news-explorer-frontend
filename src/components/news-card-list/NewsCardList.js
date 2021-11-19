@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
-import mainApi from '../../utils/mainApi';
 
 function NewsCardList({
   onSavedArticlesPage,
@@ -12,7 +11,6 @@ function NewsCardList({
   displayedCards,
   setDisplayedCards,
   handleSaveArticleClick,
-  token,
 }) {
   const [next, setNext] = useState(3);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
@@ -24,40 +22,22 @@ function NewsCardList({
     } else {
       setDisplayedCards(savedArticlesData);
     }
-  }, [cards, onSavedArticlesPage]);
+  }, [cards, onSavedArticlesPage, savedArticlesData, setDisplayedCards]);
 
   // only display 'show more button' while number of displayed cards is smaller than total cards
   useEffect(() => {
-    if (displayedCards.length < cards.length) {
+    if (displayedCards?.length < cards?.length) {
       setIsButtonHidden(false);
     } else {
       setIsButtonHidden(true);
     }
-  }, [displayedCards.length, cards.length]);
+  }, [displayedCards?.length, cards?.length]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
     setDisplayedCards(cards.slice(0, next + 3));
     setNext(next + 3);
   }
-
-  return (
-    <section
-      className={`news-card-list ${
-        onSavedArticlesPage && 'news-card-list_saved-articles'
-      }`}
-    >
-      <div className="news-card-list__container">
-        {!onSavedArticlesPage && (
-          <h3 className="news-card-list__title">Search results</h3>
-        )}
-        <ul
-          className={`news-card-list__card-grid ${
-            onSavedArticlesPage && 'news-card-list__card-grid_saved-articles'
-          }`}
-        >
-          {displayedCards.map((newscard, index) => (
-            <li className="news-card-list__card" key={index}>
             
   return onSavedArticlesPage ? (
     <section className='news-card-list news-card-list_saved-articles'>
@@ -103,12 +83,6 @@ function NewsCardList({
             Show more
           </button>
         )}
-        <button
-          className='news-card-list__show-more-button'
-          onClick={handleShowMoreCards}
-        >
-          Show more
-        </button>
       </div>
     </section>
   );

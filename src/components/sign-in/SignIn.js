@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PopupWithForm from '../popup-with-form/PopupWithForm';
 import FormValidator from '../../utils/formValidator';
 
-function SignIn({ isOpen, onClose, onLogInSubmit, onSignUpClick }) {
+function SignIn({ isOpen, onClose, onLogInSubmit, onSignUpClick, hasError }) {
   const { values, handleChange, errors, isValid, resetForm } = FormValidator();
 
   // Reset form when form is open
@@ -64,7 +64,7 @@ function SignIn({ isOpen, onClose, onLogInSubmit, onSignUpClick }) {
           {errors.password || ''}
         </p>
       </div>
-
+      {hasError && <p className='popup__error popup__error_type_form'>Incorrect email or password</p>}
       <button
         className={`popup__submit-button ${
           isValid ? 'popup__submit-button_active' : ''
