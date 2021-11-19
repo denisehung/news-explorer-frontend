@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCard.css';
 
-function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
+function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, savedArticlesData }) {
   const [isSaved, setIsSaved] = useState(false);
 
-  // function handleSave() {
-  //   setIsSaved(!isSaved);
-  // }
+  useEffect(() => {
+   if (savedArticlesData.find((obj) => obj.title === data.title)) {
+     setIsSaved(true);
+   }
+  }, [data.title, savedArticlesData]);
+
+  function handleSave() {
+    setIsSaved(!isSaved);
+  }
 
   function convertDate() {
     const months = [
@@ -63,7 +69,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
         }`}
         onClick={() => {
           onSaveArticleClick(data)
-          setIsSaved(true);
+          handleSave();
         }}
       ></button>
       {!loggedIn && (
