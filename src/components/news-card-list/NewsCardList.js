@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
-import mainApi from '../../utils/mainApi';
 
 function NewsCardList({
   onSavedArticlesPage,
@@ -16,6 +15,7 @@ function NewsCardList({
   token,
 }) {
   const [next, setNext] = useState(3);
+  const [isButtonHidden, setIsButtonHidden] = useState(false);
 
   // start with 3 news cards (on saved-articles, show all cards)
   useEffect(() => {
@@ -24,14 +24,23 @@ function NewsCardList({
     } else {
       setDisplayedCards(savedArticlesData);
     }
-  }, [cards, onSavedArticlesPage, savedArticlesData]);
+  }, [cards, onSavedArticlesPage, savedArticlesData, setDisplayedCards]);
+
+  // only display 'show more button' while number of displayed cards is smaller than total cards
+  useEffect(() => {
+    if (displayedCards?.length < cards?.length) {
+      setIsButtonHidden(false);
+    } else {
+      setIsButtonHidden(true);
+    }
+  }, [displayedCards?.length, cards?.length]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
     setDisplayedCards(cards.slice(0, next + 3));
     setNext(next + 3);
   }
-
+            
   return onSavedArticlesPage ? (
     <section className='news-card-list news-card-list_saved-articles'>
       <div className='news-card-list__container'>
@@ -56,6 +65,7 @@ function NewsCardList({
         <ul className='news-card-list__card-grid'>
           {displayedCards?.map((newscard, index) => (
             <li className='news-card-list__card' key={index}>
+
               <NewsCard
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
@@ -65,12 +75,14 @@ function NewsCardList({
             </li>
           ))}
         </ul>
-        <button
-          className='news-card-list__show-more-button'
-          onClick={handleShowMoreCards}
-        >
-          Show more
-        </button>
+        {!onSavedArticlesPage && !isButtonHidden && (
+          <button
+            className={`news-card-list__show-more-button`}
+            onClick={handleShowMoreCards}
+          >
+            Show more
+          </button>
+        )}
       </div>
     </section>
   );

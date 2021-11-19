@@ -65,7 +65,7 @@
 }
 
 .search-hero__input:focus {
-  outline: none;
+  outline: 2px solid #2f71e5;
 }
 
 ::placeholder {

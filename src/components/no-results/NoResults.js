@@ -2,7 +2,7 @@ import React from 'react';
 import './NoResults.css';
 import NoResultsImage from '../../images/no-results-image.svg';
 
-function NoResults() {
+function NoResults({hasError}) {
   return (
     <section className='no-results'>
       <div className='no-results__container'>
@@ -13,7 +13,7 @@ function NoResults() {
         />
         <h3 className='no-results__title'>Nothing found</h3>
         <p className='no-results__description'>
-          Sorry, but nothing matched your search terms
+          {hasError ? "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later." : "Sorry, but nothing matched your search terms"}
         </p>
       </div>
     </section>
