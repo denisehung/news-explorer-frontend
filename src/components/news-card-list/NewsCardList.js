@@ -11,7 +11,8 @@ function NewsCardList({
   setSavedArticlesData,
   displayedCards,
   setDisplayedCards,
-  handleSaveArticleClick,
+  onSaveArticleClick,
+  onDeleteArticleClick,
   token,
 }) {
   const [next, setNext] = useState(3);
@@ -23,7 +24,7 @@ function NewsCardList({
     } else {
       setDisplayedCards(savedArticlesData);
     }
-  }, [cards, onSavedArticlesPage]);
+  }, [cards, onSavedArticlesPage, onDeleteArticleClick]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
@@ -41,7 +42,7 @@ function NewsCardList({
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                // onSaveArticleClick={handleSaveArticleClick}
+                onDeleteArticleClick={onDeleteArticleClick}
               />
             </li>
           ))}
@@ -59,7 +60,7 @@ function NewsCardList({
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                onSaveArticleClick={handleSaveArticleClick}
+                onSaveArticleClick={onSaveArticleClick}
               />
             </li>
           ))}

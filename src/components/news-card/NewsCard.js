@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCard.css';
 
-function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
+function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onDeleteArticleClick }) {
   const [isSaved, setIsSaved] = useState(false);
 
   // function handleSave() {
@@ -36,7 +36,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick }) {
   return onSavedArticlesPage ? (
     <div className='news-card'>
       <img src={data.image} alt={data.title} className='news-card__image' />
-      <button className='news-card__button news-card__button_delete'></button>
+      <button className='news-card__button news-card__button_delete' onClick={() => onDeleteArticleClick(data)} ></button>
       <div className='news-card__tag news-card__tag_type_tooltip'>
         Remove from saved
       </div>
