@@ -239,6 +239,7 @@ function App() {
               <NewsCardList
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
+                savedArticlesData={savedArticlesData}
                 cards={cards}
                 onSaveArticleClick={handleSaveArticle}
                 displayedCards={displayedCards}

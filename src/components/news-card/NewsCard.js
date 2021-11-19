@@ -12,12 +12,19 @@ function NewsCard({
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
+    console.log(savedArticlesData);
+    console.log(data.title);
     if (savedArticlesData.find((obj) => obj.title === data.title)) {
       setIsSaved(true);
     }
   }, [data.title, savedArticlesData]);
 
   function handleSave() {
+    if (isSaved) {
+      onDeleteArticleClick();
+    } else {
+      onSavedArticlesPage();
+    }
     setIsSaved(!isSaved);
   }
 

@@ -43,6 +43,7 @@ function NewsCardList({
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 onDeleteArticleClick={onDeleteArticleClick}
+                savedArticlesData={savedArticlesData}
               />
             </li>
           ))}
