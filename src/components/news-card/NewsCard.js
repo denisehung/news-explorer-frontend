@@ -48,7 +48,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, sav
       <div className='news-card__tag news-card__tag_type_keyword'>
         {data.keyword}
       </div>
-      <a href={data.url} className="news-card__link">
+      <a href={data.url} className="news-card__link" target="_blank" rel="noreferrer">
         <img
           src={data.image}
           alt={data.title}
@@ -78,7 +78,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, sav
           Sign in to save articles
         </div>
       )}
-      <a href={data.url} className="news-card__link">
+      <a href={data.url} className="news-card__link" target="_blank" rel="noreferrer">
         <img
           src={data.urlToImage}
           alt={data.title}
