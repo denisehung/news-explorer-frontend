@@ -94,6 +94,7 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
+
   // if search keyword, immediately set results to true
   // useEffect(() => {
   //   if (searchKeyword) {

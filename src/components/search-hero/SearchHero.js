@@ -9,6 +9,7 @@ function SearchHero({
 }) {
 
   const [formInputValue, setFormInputValue] = useState('');
+  const [placeholderText, setPlaceholderText] = useState('Enter topic');
   
   function handleChange(e) {
     setSearchKeyword(e.target.value);
@@ -17,10 +18,13 @@ function SearchHero({
 
   function handleSubmit(e) {
     e.preventDefault();
-    //api call to PUT the keyword into the filter...
-    setIsNewsCardListOpen(true);
-    onSearch(searchKeyword);
-    //setFormInputValue('');
+    if (!formInputValue) {
+      setPlaceholderText('Please enter a keyword');
+    } else {
+      //api call to PUT the keyword into the filter...
+      setIsNewsCardListOpen(true);
+      onSearch(searchKeyword);
+    }
   }
 
   return (
@@ -34,7 +38,7 @@ function SearchHero({
         <form className='search-hero__search-container' onSubmit={handleSubmit}>
           <input
             className='search-hero__input'
-            placeholder='Enter topic'
+            placeholder={placeholderText}
             value={formInputValue}
             onChange={handleChange}
           ></input>
