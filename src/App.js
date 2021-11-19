@@ -70,7 +70,7 @@ function App() {
         setSavedArticlesData(res.articles);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   //determine if user is on saved-articles page
   useEffect(() => {
@@ -92,16 +92,6 @@ function App() {
     document.addEventListener('keydown', closeByEscape);
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
-
-
-  // if search keyword, immediately set results to true
-  // useEffect(() => {
-  //   if (searchKeyword) {
-  //     setHasResults(true);
-  //   } else {
-  //     setHasResults(false);
-  //   }
-  // }, [searchKeyword]);
 
   function handleRegisterSubmit(email, password, name) {
     auth
