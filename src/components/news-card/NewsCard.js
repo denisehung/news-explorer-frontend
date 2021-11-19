@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCard.css';
 
-function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onDeleteArticleClick }) {
+function NewsCard({
+  data,
+  onSavedArticlesPage,
+  loggedIn,
+  onSaveArticleClick,
+  onDeleteArticleClick,
+  savedArticlesData,
+}) {
   const [isSaved, setIsSaved] = useState(false);
 
-  // function handleSave() {
-  //   setIsSaved(!isSaved);
-  // }
+  useEffect(() => {
+    if (savedArticlesData.find((obj) => obj.title === data.title)) {
+      setIsSaved(true);
+    }
+  }, [data.title, savedArticlesData]);
+
+  function handleSave() {
+    setIsSaved(!isSaved);
+  }
 
   function convertDate() {
     const months = [
@@ -36,7 +49,10 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onD
   return onSavedArticlesPage ? (
     <div className='news-card'>
       <img src={data.image} alt={data.title} className='news-card__image' />
-      <button className='news-card__button news-card__button_delete' onClick={() => onDeleteArticleClick(data)} ></button>
+      <button
+        className='news-card__button news-card__button_delete'
+        onClick={() => onDeleteArticleClick(data)}
+      ></button>
       <div className='news-card__tag news-card__tag_type_tooltip'>
         Remove from saved
       </div>
@@ -61,7 +77,10 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onD
         className={`news-card__button news-card__button_save ${
           loggedIn && isSaved ? 'news-card__button_save_active' : ''
         }`}
-        onClick={() => onSaveArticleClick(data)}
+        onClick={() => {
+          onSaveArticleClick(data);
+          handleSave();
+        }}
       ></button>
       {!loggedIn && (
         <div className='news-card__tag news-card__tag_type_tooltip'>
