@@ -23,7 +23,7 @@ class NewsApi {
     return fetch(
       `${
         this._baseUrl
-      }?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&sortBy=relevancy&pageSize=10&apiKey=${apiKey}`
+      }?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&language=en&sortBy=relevancy&pageSize=100&apiKey=${apiKey}`
     )
       .then((res) => this._returnRes(res))
       .then((res) => res.articles);

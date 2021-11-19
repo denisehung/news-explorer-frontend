@@ -23,7 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
@@ -184,6 +184,12 @@ function App() {
       });
   }
 
+  function handleLogOut() {
+    setLoggedIn(false);
+    setToken(localStorage.removeItem('token'));
+    history.push('/');
+  }
+
   function handleLogin() {
     setHasError(false);
     setLoggedIn(true);
@@ -226,6 +232,7 @@ function App() {
           setIsNewsCardListOpen={setIsNewsCardListOpen}
           setSearchKeyword={setSearchKeyword}
           onSavedArticlesPage={onSavedArticlesPage}
+          onLogOut={handleLogOut}
         />
         <Switch>
           <Route exact path="/">

@@ -11,11 +11,11 @@ import MenuLogoutIconBlack from '../../images/menu-logout-icon_type_black.svg';
 function Header({
   loggedIn,
   currentUser,
-  setLoggedIn,
   onSignInClick,
   setIsNewsCardListOpen,
   setSearchKeyword,
   onSavedArticlesPage,
+  onLogOut
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileWidth, setMobileWidth] = useState(false);
@@ -98,13 +98,9 @@ function Header({
     handleNavClick();
   }
 
-  // function logIn() {
-  //   setLoggedIn(true)
-  // };
-
   function logOut() {
     handleNavClick();
-    setLoggedIn(false);
+    onLogOut();
   }
 
   return loggedIn ? (
