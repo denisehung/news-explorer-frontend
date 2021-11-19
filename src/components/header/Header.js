@@ -119,14 +119,14 @@ function Header({
           onSavedArticlesPage && 'header__logo_saved-articles'
         } ${isMenuOpen && 'header__logo_menu-open'}`}
         exact
-        to='/'
+        to="/"
         onClick={handleNavClick}
       >
         NewsExplorer
       </NavLink>
       <img
-        className='header__menu-icon'
-        alt='menu icon'
+        className="header__menu-icon"
+        alt="menu icon"
         src={hamburgerDisplay}
         onClick={onHamburgerClick}
       />
@@ -148,7 +148,7 @@ function Header({
                 : 'header__active_color_white'
             }
             exact
-            to='/'
+            to="/"
             onClick={handleNavClick}
           >
             Home
@@ -162,7 +162,7 @@ function Header({
                 ? 'header__active_color_black'
                 : 'header__active_color_white'
             }
-            to='/saved-articles'
+            to="/saved-articles"
             onClick={handleNavClick}
           >
             Saved articles
@@ -171,14 +171,14 @@ function Header({
             className={`header__log-button header__signout-button header__log-button_logged-in ${
               onSavedArticlesPage && 'header__log-button_saved-articles'
             }`}
-            to=''
+            to=""
             onClick={logOut}
           >
-            <p className='header__log-button-username'>{currentUser?.name}</p>
+            <p className="header__log-button-username">{currentUser?.name}</p>
             <img
-              className='header__log-button-logout-icon'
+              className="header__log-button-logout-icon"
               src={logoutIconDisplay}
-              alt='logout icon'
+              alt="logout icon"
             />
           </NavLink>
         </MobileNavigationWrapper>
@@ -191,12 +191,12 @@ function Header({
         isMenuOpen ? 'header_mobile-menu-open' : 'header_mobile-menu-closed'
       }`}
     >
-      <NavLink className='header__logo' exact to='/' onClick={handleNavClick}>
+      <NavLink className="header__logo" exact to="/" onClick={handleNavClick}>
         NewsExplorer
       </NavLink>
       <img
-        className='header__menu-icon'
-        alt='menu icon'
+        className="header__menu-icon"
+        alt="menu icon"
         src={hamburgerDisplay}
         onClick={onHamburgerClick}
       />
@@ -209,10 +209,10 @@ function Header({
       >
         <MobileNavigationWrapper mobileWidth={mobileWidth}>
           <NavLink
-            className='header__link-home'
-            activeClassName='header__active_color_white'
+            className="header__link-home"
+            activeClassName="header__active_color_white"
             exact
-            to='/'
+            to="/"
             onClick={handleNavClick}
           >
             Home
@@ -221,7 +221,7 @@ function Header({
             className={
               'header__log-button header__signin-button header__log-button_logged-out'
             }
-            to=''
+            to=""
             onClick={handleLogButtonClick}
           >
             Sign In

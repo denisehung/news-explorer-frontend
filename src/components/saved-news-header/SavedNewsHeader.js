@@ -19,15 +19,15 @@ function SavedNewsHeader({ currentUser, savedArticlesData }) {
   }, [savedArticlesData]);
 
   return (
-    <section className='saved'>
-      <div className='saved__content'>
-        <p className='saved__title'>Saved articles</p>
-        <h1 className='saved__heading'>
+    <section className="saved">
+      <div className="saved__content">
+        <p className="saved__title">Saved articles</p>
+        <h1 className="saved__heading">
           {currentUser.name}, you have {savedArticlesData.length} saved articles
         </h1>
-        <p className='saved__keywords'>
+        <p className="saved__keywords">
           By keywords:{' '}
-          <span className='saved__keywords-bold'>
+          <span className="saved__keywords-bold">
             {`${keywordArray[0]}, ${keywordArray[1]}, and ${
               keywordArray.length - 2
             } others`}

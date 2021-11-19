@@ -15,15 +15,15 @@ function PopupWithForm(props) {
       }`}
       onClick={handlePopupClick}
     >
-      <div className='popup__wrapper'>
+      <div className="popup__wrapper">
         <button
-          className='popup__close-button popup__close-button_type_form'
-          type='button'
-          aria-label='Close popup'
+          className="popup__close-button popup__close-button_type_form"
+          type="button"
+          aria-label="Close popup"
           onClick={props.onClose}
         ></button>
-        <div className='popup__form-container'>
-          <h2 className='popup__title'>{props.title}</h2>
+        <div className="popup__form-container">
+          <h2 className="popup__title">{props.title}</h2>
           <form
             className={`popup__form popup__form_type_${props.name}`}
             name={`form-${props.name}`}
