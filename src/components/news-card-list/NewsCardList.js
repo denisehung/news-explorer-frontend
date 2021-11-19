@@ -10,7 +10,9 @@ function NewsCardList({
   setSavedArticlesData,
   displayedCards,
   setDisplayedCards,
-  handleSaveArticleClick,
+  onSaveArticleClick,
+  onDeleteArticleClick,
+  token,
 }) {
   const [next, setNext] = useState(3);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
@@ -49,7 +51,7 @@ function NewsCardList({
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                // onSaveArticleClick={handleSaveArticleClick}
+                onDeleteArticleClick={onDeleteArticleClick}
               />
             </li>
           ))}
@@ -68,9 +70,7 @@ function NewsCardList({
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                image={newscard.urlToImage}
-                savedArticlesData={savedArticlesData}
-                onSaveArticleClick={handleSaveArticleClick}
+                onSaveArticleClick={onSaveArticleClick}
               />
             </li>
           ))}

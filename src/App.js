@@ -37,7 +37,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [savedArticlesData, setSavedArticlesData] = useState([]);
   const [displayedCards, setDisplayedCards] = useState([]);
-
+  
   // Check user token
   useEffect(() => {
     if (token) {
@@ -127,13 +127,17 @@ function App() {
       });
   }
 
+  // saves article, adds to array of articles
   function handleSaveArticle(data) {
     if (!savedArticlesData.find((obj) => obj.title === data.title)) {
       mainApi
         .saveArticle(data, searchKeyword, token)
         .then((data) => {
           if (data) {
-            setSavedArticlesData(savedArticles => [...savedArticles, data.article]);
+            setSavedArticlesData((savedArticles) => [
+              ...savedArticles,
+              data.article,
+            ]);
             console.log('article saved!');
           }
         })
@@ -143,16 +147,20 @@ function App() {
     }
   }
 
-  function handleDeleteArticle(data) {
-    // if(card exists) {
-    mainApi
-      .deleteArticle(data)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
 
-    // }
+  // deletes article, removes from array
+  function handleDeleteArticle(data) {
+    const articleId = data._id;
+    if (savedArticlesData.find((obj) => obj._id === articleId)) {
+      mainApi
+        .deleteArticle(articleId, token)
+        .then((data) => {
+          setSavedArticlesData(savedArticlesData.filter((obj) => obj._id !== data.article._id));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log('that card doesnt exist!');
+    }
   }
 
   function handleSearchSubmit(keyword) {
@@ -233,7 +241,7 @@ function App() {
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 cards={cards}
-                handleSaveArticleClick={handleSaveArticle}
+                onSaveArticleClick={handleSaveArticle}
                 displayedCards={displayedCards}
                 setDisplayedCards={setDisplayedCards}
               />
@@ -255,6 +263,7 @@ function App() {
               token={token}
               displayedCards={displayedCards}
               setDisplayedCards={setDisplayedCards}
+              onDeleteArticleClick={handleDeleteArticle}
             />
           </ProtectedRoute>
         </Switch>
