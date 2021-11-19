@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCard.css';
 
-function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onDeleteArticleClick, savedArticlesData }) {
+function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onDeleteArticleClick, savedArticlesData, onSignInClick }) {
   const [isSaved, setIsSaved] = useState(false);
 
  useEffect(() => {
@@ -71,6 +71,7 @@ function NewsCard({ data, onSavedArticlesPage, loggedIn, onSaveArticleClick, onD
         onClick={() => {
           onSaveArticleClick(data)
           handleSave();
+          !loggedIn && onSignInClick(); // if user is not logged in, open sign in ppopup on click
         }}
       ></button>
       {!loggedIn && (

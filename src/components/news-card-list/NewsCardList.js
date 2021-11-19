@@ -7,12 +7,11 @@ function NewsCardList({
   loggedIn,
   cards,
   savedArticlesData,
-  setSavedArticlesData,
   displayedCards,
   setDisplayedCards,
   onSaveArticleClick,
   onDeleteArticleClick,
-  token,
+  onSignInClick
 }) {
   const [next, setNext] = useState(3);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
@@ -71,6 +70,7 @@ function NewsCardList({
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 onSaveArticleClick={onSaveArticleClick}
+                onSignInClick={onSignInClick}
               />
             </li>
           ))}

@@ -244,6 +244,7 @@ function App() {
                 onSaveArticleClick={handleSaveArticle}
                 displayedCards={displayedCards}
                 setDisplayedCards={setDisplayedCards}
+                onSignInClick={handleSignInClick}
               />
             )}
             {isLoading && <PreloaderAnimation />}
