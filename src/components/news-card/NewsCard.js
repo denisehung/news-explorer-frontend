@@ -49,7 +49,6 @@ function NewsCard({
 
   return onSavedArticlesPage ? (
     <div className="news-card">
-      <img src={data.image} alt={data.title} className="news-card__image" />
       <button
         className="news-card__button news-card__button_delete"
         onClick={() => onDeleteArticleClick(data)}
