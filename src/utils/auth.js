@@ -1,4 +1,7 @@
-export const BASE_URL = (process.env.NODE_ENV === "production" ? "https://api.aloha.students.nomoreparties.site" : "http://localhost:3000");
+export const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.aloha.students.nomoreparties.site'
+    : 'http://localhost:3000';
 
 function returnRes(res) {
   if (res.ok) {

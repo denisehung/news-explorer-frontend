@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
-import mainApi from '../../utils/mainApi';
 
 function NewsCardList({
   onSavedArticlesPage,
   loggedIn,
   cards,
   savedArticlesData,
-  setSavedArticlesData,
   displayedCards,
   setDisplayedCards,
-  handleSaveArticleClick,
-  token,
+  onSaveArticleClick,
+  onDeleteArticleClick,
+  onSignInClick,
 }) {
   const [next, setNext] = useState(3);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
@@ -24,16 +23,16 @@ function NewsCardList({
     } else {
       setDisplayedCards(savedArticlesData);
     }
-  }, [cards, onSavedArticlesPage]);
+  }, [cards, onSavedArticlesPage, savedArticlesData, setDisplayedCards]);
 
   // only display 'show more button' while number of displayed cards is smaller than total cards
   useEffect(() => {
-    if (displayedCards.length < cards.length) {
+    if (displayedCards?.length < cards?.length) {
       setIsButtonHidden(false);
     } else {
       setIsButtonHidden(true);
     }
-  }, [displayedCards.length, cards.length]);
+  }, [displayedCards?.length, cards?.length]);
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
@@ -51,7 +50,7 @@ function NewsCardList({
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                // onSaveArticleClick={handleSaveArticleClick}
+                onDeleteArticleClick={onDeleteArticleClick}
               />
             </li>
           ))}
@@ -69,9 +68,8 @@ function NewsCardList({
                 data={newscard}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                image={newscard.urlToImage}
-                savedArticlesData={savedArticlesData}
-                onSaveArticleClick={handleSaveArticleClick}
+                onSaveArticleClick={onSaveArticleClick}
+                onSignInClick={onSignInClick}
               />
             </li>
           ))}

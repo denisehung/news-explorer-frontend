@@ -22,10 +22,8 @@ function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
@@ -36,9 +34,10 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
+  const [hasError, setHasError] = useState(false);
   const [savedArticlesData, setSavedArticlesData] = useState([]);
   const [displayedCards, setDisplayedCards] = useState([]);
-
+  
   // Check user token
   useEffect(() => {
     if (token) {
@@ -71,7 +70,7 @@ function App() {
         setSavedArticlesData(res.articles);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   //determine if user is on saved-articles page
   useEffect(() => {
@@ -94,16 +93,6 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
-
-  // if search keyword, immediately set results to true
-  // useEffect(() => {
-  //   if (searchKeyword) {
-  //     setHasResults(true);
-  //   } else {
-  //     setHasResults(false);
-  //   }
-  // }, [searchKeyword]);
-
   function handleRegisterSubmit(email, password, name) {
     auth
       .register(email, password, name)
@@ -113,9 +102,12 @@ function App() {
           handleRegister();
         } else {
           setIsRegistered(false);
+          setHasError(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleLoginSubmit(email, password) {
@@ -129,16 +121,23 @@ function App() {
           history.push('/');
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setHasError(true);
+      });
   }
 
+  // saves article, adds to array of articles
   function handleSaveArticle(data) {
     if (!savedArticlesData.find((obj) => obj.title === data.title)) {
       mainApi
         .saveArticle(data, searchKeyword, token)
         .then((data) => {
           if (data) {
-            setSavedArticlesData(savedArticles => [...savedArticles, data.article]);
+            setSavedArticlesData((savedArticles) => [
+              ...savedArticles,
+              data.article,
+            ]);
             console.log('article saved!');
           }
         })
@@ -148,16 +147,20 @@ function App() {
     }
   }
 
-  function handleDeleteArticle(data) {
-    // if(card exists) {
-    mainApi
-      .deleteArticle(data)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
 
-    // }
+  // deletes article, removes from array
+  function handleDeleteArticle(data) {
+    const articleId = data._id;
+    if (savedArticlesData.find((obj) => obj._id === articleId)) {
+      mainApi
+        .deleteArticle(articleId, token)
+        .then((data) => {
+          setSavedArticlesData(savedArticlesData.filter((obj) => obj._id !== data.article._id));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log('that card doesnt exist!');
+    }
   }
 
   function handleSearchSubmit(keyword) {
@@ -174,29 +177,40 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setHasError(true);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
 
+  function handleLogOut() {
+    setLoggedIn(false);
+    localStorage.removeItem('token');
+    history.push('/');
+  }
+
   function handleLogin() {
+    setHasError(false);
     setLoggedIn(true);
     setIsSignInOpen(false);
   }
 
   function handleRegister() {
+    setHasError(false);
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(true);
   }
 
   function handleSignInClick() {
+    setHasError(false);
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
     setIsSuccessPopupOpen(false);
   }
 
   function handleSignUpClick() {
+    setHasError(false);
     setIsSignUpOpen(true);
     setIsSignInOpen(false);
   }
@@ -209,7 +223,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className='page'>
+      <div className="page">
         <Header
           loggedIn={loggedIn}
           currentUser={currentUser}
@@ -218,9 +232,10 @@ function App() {
           setIsNewsCardListOpen={setIsNewsCardListOpen}
           setSearchKeyword={setSearchKeyword}
           onSavedArticlesPage={onSavedArticlesPage}
+          onLogOut={handleLogOut}
         />
         <Switch>
-          <Route exact path='/'>
+          <Route exact path="/">
             <SearchHero
               onSearch={handleSearchSubmit}
               searchKeyword={searchKeyword}
@@ -233,13 +248,14 @@ function App() {
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 cards={cards}
-                handleSaveArticleClick={handleSaveArticle}
+                onSaveArticleClick={handleSaveArticle}
                 displayedCards={displayedCards}
                 setDisplayedCards={setDisplayedCards}
+                onSignInClick={handleSignInClick}
               />
             )}
             {isLoading && <PreloaderAnimation />}
-            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults />}
+            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults hasError={hasError}/>}
             <About />
           </Route>
           <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
@@ -255,28 +271,23 @@ function App() {
               token={token}
               displayedCards={displayedCards}
               setDisplayedCards={setDisplayedCards}
+              onDeleteArticleClick={handleDeleteArticle}
             />
           </ProtectedRoute>
         </Switch>
         <SignIn
-          email={email}
-          password={password}
-          setEmail={setEmail}
-          setPassword={setPassword}
           isOpen={isSignInOpen}
           onClose={closeAllPopups}
           onSignUpClick={handleSignUpClick}
           onLogInSubmit={handleLoginSubmit}
+          hasError={hasError}
         />
         <SignUp
-          email={email}
-          password={password}
-          setEmail={setEmail}
-          setPassword={setPassword}
           isOpen={isSignUpOpen}
           onClose={closeAllPopups}
           onSignInClick={handleSignInClick}
           onRegisterSubmit={handleRegisterSubmit}
+          hasError={hasError}
         />
         <SuccessPopup
           isOpen={isSuccessPopupOpen}

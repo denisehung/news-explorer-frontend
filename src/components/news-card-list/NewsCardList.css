@@ -46,7 +46,7 @@
   height: 64px;
   border-radius: 80px;
   border: none;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #1a1b22;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
@@ -81,7 +81,6 @@
 }
 
 @media screen and (max-width: 700px) {
-
   .news-card-list__card-grid {
     grid-template-columns: 1fr;
   }
@@ -92,7 +91,7 @@
 }
 
 @media screen and (max-width: 520px) {
-  .news-card-list{
+  .news-card-list {
     padding: 24px 16px 24px 16px;
   }
 }
