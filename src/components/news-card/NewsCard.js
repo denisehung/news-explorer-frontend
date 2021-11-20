@@ -60,7 +60,7 @@ function NewsCard({
         {data.keyword}
       </div>
       <a
-        href={data.url}
+        href={data.link}
         className="news-card__link"
         target="_blank"
         rel="noreferrer"
