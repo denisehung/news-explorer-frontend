@@ -1,11 +1,15 @@
-const today = new Date().toISOString;
-const weekAgo = new Date(Date.now - 7 * 24 * 60 * 60 * 1000).toISOString;
+const today = new Date();
+const weekAgo = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate() - 7
+);
+const apiKey = '89646cd537e44c1685691caa70a539b4';
 
 class NewsApi {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this._apiKey = '89646cd537e44c1685691caa70a539b4';
   }
 
   _returnRes = (res) => {
@@ -17,7 +21,9 @@ class NewsApi {
 
   searchArticles(keyword) {
     return fetch(
-      `${this._baseUrl}?q=${keyword}&from=${weekAgo}&to=${today}&sortBy=popularity&pageSize=100&apiKey=${this._apiKey}`
+      `${
+        this._baseUrl
+      }?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&language=en&sortBy=relevancy&pageSize=100&apiKey=${apiKey}`
     )
       .then((res) => this._returnRes(res))
       .then((res) => res.articles);
