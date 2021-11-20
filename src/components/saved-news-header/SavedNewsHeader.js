@@ -8,14 +8,22 @@ function SavedNewsHeader({ currentUser, savedArticlesData }) {
     // grab keywords from article objects
     const allKeywordsArray = savedArticlesData.map((value) => value.keyword);
 
-    //capitalize first letter, and create a Set of one of each keyword
-    setKeyWordArray([
-      ...new Set(
-        allKeywordsArray.map(
-          (keyword) => keyword.charAt(0).toUpperCase() + keyword.substr(1)
-        )
-      ),
-    ]);
+    // capitalize first letter of each keyword
+    allKeywordsArray.map(
+      (keyword) => keyword.charAt(0).toUpperCase() + keyword.substr(1)
+    );
+
+    // count the occurrence of each keyword in the array
+    var countKeywords = allKeywordsArray.reduce(function (keyword, value) {
+      keyword[value] = (keyword[value] || 0) + 1;
+      return keyword;
+    }, {});
+
+    // sort keywords by occurence
+    var sortedArray = Object.keys(countKeywords).sort(function (a, b) {
+      return countKeywords[b] - countKeywords[a];
+    });
+    setKeyWordArray(sortedArray);
   }, [savedArticlesData]);
 
   return (
@@ -28,9 +36,11 @@ function SavedNewsHeader({ currentUser, savedArticlesData }) {
         <p className="saved__keywords">
           By keywords:{' '}
           <span className="saved__keywords-bold">
-            {`${keywordArray[0]}, ${keywordArray[1]}, and ${
-              keywordArray.length - 2
-            } others`}
+            {keywordArray.length > 3
+              ? `${keywordArray[0]}, ${keywordArray[1]}, and ${
+                  keywordArray.length - 2
+                } others`
+              : keywordArray.join(', ')}
           </span>
         </p>
       </div>
