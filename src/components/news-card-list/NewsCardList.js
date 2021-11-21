@@ -23,7 +23,7 @@ function NewsCardList({
     } else {
       setDisplayedCards(savedArticles);
     }
-  }, [onSavedArticlesPage, savedArticles]);
+  }, [cards, onSavedArticlesPage, savedArticles, setDisplayedCards]);
 
   // only display 'show more button' while number of displayed cards is smaller than total cards
   useEffect(() => {

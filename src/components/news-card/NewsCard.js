@@ -15,7 +15,6 @@ function NewsCard({
 
   useEffect(() => {
     const savedArticlesTitles = savedArticles.map((article) => article.title);
-
     if (
       savedArticlesTitles.includes(data.title)
     ) {

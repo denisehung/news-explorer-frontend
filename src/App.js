@@ -165,10 +165,12 @@ function App() {
   }
 
   function handleSearchSubmit(keyword) {
+    setIsNewsCardListOpen(false);
     setIsLoading(true);
     newsApi
       .searchArticles(keyword)
       .then((res) => {
+        setIsNewsCardListOpen(true);
         setCards(res);
         if (res.length === 0) {
           setHasResults(false);

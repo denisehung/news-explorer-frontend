@@ -21,7 +21,7 @@ function SearchHero({
       setPlaceholderText('Please enter a keyword');
     } else {
       //api call to PUT the keyword into the filter...
-      setIsNewsCardListOpen(true);
+     
       onSearch(searchKeyword);
     }
   }
