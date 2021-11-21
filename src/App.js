@@ -35,9 +35,9 @@ function App() {
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
   const [hasError, setHasError] = useState(false);
-  const [savedArticlesData, setSavedArticlesData] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
   const [displayedCards, setDisplayedCards] = useState([]);
-  
+
   // Check user token
   useEffect(() => {
     if (token) {
@@ -66,8 +66,8 @@ function App() {
     mainApi
       .getArticles(token)
       .then((res) => {
-        setDisplayedCards(res.articles);
-        setSavedArticlesData(res.articles);
+        // setDisplayedCards(res.articles);
+        setSavedArticles(res.articles);
       })
       .catch((err) => console.log(err));
   }, [token]);
@@ -129,12 +129,12 @@ function App() {
 
   // saves article, adds to array of articles
   function handleSaveArticle(data) {
-    if (!savedArticlesData.find((obj) => obj.title === data.title)) {
+    if (!savedArticles.find((obj) => obj.title === data.title)) {
       mainApi
         .saveArticle(data, searchKeyword, token)
         .then((data) => {
           if (data) {
-            setSavedArticlesData((savedArticles) => [
+            setSavedArticles((savedArticles) => [
               ...savedArticles,
               data.article,
             ]);
@@ -147,27 +147,41 @@ function App() {
     }
   }
 
-
   // deletes article, removes from array
   function handleDeleteArticle(data) {
-    const articleId = data._id;
-    if (savedArticlesData.find((obj) => obj._id === articleId)) {
-      mainApi
-        .deleteArticle(articleId, token)
-        .then((data) => {
-          setSavedArticlesData(savedArticlesData.filter((obj) => obj._id !== data.article._id));
-        })
-        .catch((err) => console.log(err));
+    let articleId;
+
+    // if on saved articles page, find the corresponding saved article that matches the news API article, and save its ID to articleId. if not on that page, simply save the data ID to articleID.
+    if (!onSavedArticlesPage) {
+      if (savedArticles.find((obj) => obj.link === data.url)) {
+        const article = savedArticles.find((obj) => {
+          return obj.link === data.url;
+        });
+        articleId = article._id;
+      } else {
+        console.log('that card doesnt exist!');
+      }
     } else {
-      console.log('that card doesnt exist!');
+      articleId = data._id;
     }
+
+    mainApi
+      .deleteArticle(articleId, token)
+      .then((data) => {
+        setSavedArticles(
+          savedArticles.filter((obj) => obj._id !== data.article._id)
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleSearchSubmit(keyword) {
+    setIsNewsCardListOpen(false);
     setIsLoading(true);
     newsApi
       .searchArticles(keyword)
       .then((res) => {
+        setIsNewsCardListOpen(true);
         setCards(res);
         if (res.length === 0) {
           setHasResults(false);
@@ -248,26 +262,30 @@ function App() {
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 cards={cards}
+                savedArticles={savedArticles}
                 onSaveArticleClick={handleSaveArticle}
+                onDeleteArticleClick={handleDeleteArticle}
                 displayedCards={displayedCards}
                 setDisplayedCards={setDisplayedCards}
                 onSignInClick={handleSignInClick}
               />
             )}
             {isLoading && <PreloaderAnimation />}
-            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults hasError={hasError}/>}
+            {!hasResults && !isLoading && isNewsCardListOpen && (
+              <NoResults hasError={hasError} />
+            )}
             <About />
           </Route>
-          <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
+          <ProtectedRoute path="/saved-articles" loggedIn={loggedIn}>
             <SavedNewsHeader
               currentUser={currentUser}
-              savedArticlesData={savedArticlesData}
+              savedArticles={savedArticles}
             />
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
-              savedArticlesData={savedArticlesData}
-              setSavedArticlesData={setSavedArticlesData}
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
               token={token}
               displayedCards={displayedCards}
               setDisplayedCards={setDisplayedCards}

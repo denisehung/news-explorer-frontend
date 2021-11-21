@@ -5,8 +5,8 @@ import NewsCard from '../news-card/NewsCard';
 function NewsCardList({
   onSavedArticlesPage,
   loggedIn,
-  cards,
-  savedArticlesData,
+  cards, // array of all returned NewsApi cards
+  savedArticles, // array of saved articles
   displayedCards,
   setDisplayedCards,
   onSaveArticleClick,
@@ -21,9 +21,9 @@ function NewsCardList({
     if (!onSavedArticlesPage) {
       setDisplayedCards(cards?.slice(0, 3));
     } else {
-      setDisplayedCards(savedArticlesData);
+      setDisplayedCards(savedArticles);
     }
-  }, [cards, onSavedArticlesPage, savedArticlesData, setDisplayedCards]);
+  }, [cards, onSavedArticlesPage, savedArticles, setDisplayedCards]);
 
   // only display 'show more button' while number of displayed cards is smaller than total cards
   useEffect(() => {
@@ -51,6 +51,7 @@ function NewsCardList({
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 onDeleteArticleClick={onDeleteArticleClick}
+                savedArticles={savedArticles}
               />
             </li>
           ))}
@@ -69,6 +70,8 @@ function NewsCardList({
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 onSaveArticleClick={onSaveArticleClick}
+                onDeleteArticleClick={onDeleteArticleClick}
+                savedArticles={savedArticles}
                 onSignInClick={onSignInClick}
               />
             </li>

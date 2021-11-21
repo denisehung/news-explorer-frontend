@@ -2,23 +2,29 @@ import React, { useState, useEffect } from 'react';
 import './NewsCard.css';
 
 function NewsCard({
-  data,
+  data, // data for individual NewsCard
   onSavedArticlesPage,
   loggedIn,
   onSaveArticleClick,
   onDeleteArticleClick,
-  savedArticlesData,
+  savedArticles,
   onSignInClick,
 }) {
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    if (savedArticlesData?.find((obj) => obj.title === data.title)) {
+    const savedArticlesTitles = savedArticles.map((article) => article.title);
+    if (savedArticlesTitles.includes(data.title)) {
       setIsSaved(true);
     }
-  }, [data.title, savedArticlesData]);
+  }, [data.title, onSavedArticlesPage, savedArticles]);
 
-  function handleSave() {
+  function handleSave(data) {
+    if (isSaved) {
+      onDeleteArticleClick(data);
+    } else {
+      onSaveArticleClick(data);
+    }
     setIsSaved(!isSaved);
   }
 
@@ -81,8 +87,7 @@ function NewsCard({
           loggedIn && isSaved ? 'news-card__button_save_active' : ''
         }`}
         onClick={() => {
-          onSaveArticleClick(data);
-          handleSave();
+          handleSave(data);
           !loggedIn && onSignInClick(); // if user is not logged in, open sign in ppopup on click
         }}
       ></button>

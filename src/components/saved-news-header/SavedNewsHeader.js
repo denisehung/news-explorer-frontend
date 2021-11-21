@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './SavedNewsHeader.css';
 
-function SavedNewsHeader({ currentUser, savedArticlesData }) {
+function SavedNewsHeader({ currentUser, savedArticles }) {
   const [keywordArray, setKeyWordArray] = useState([]);
 
   useEffect(() => {
     // grab keywords from article objects
-    const allKeywordsArray = savedArticlesData.map((value) => value.keyword);
+    const allKeywordsArray = savedArticles.map((value) => value.keyword);
 
     // capitalize first letter of each keyword
     allKeywordsArray.map(
@@ -24,14 +24,14 @@ function SavedNewsHeader({ currentUser, savedArticlesData }) {
       return countKeywords[b] - countKeywords[a];
     });
     setKeyWordArray(sortedArray);
-  }, [savedArticlesData]);
+  }, [savedArticles]);
 
   return (
     <section className="saved">
       <div className="saved__content">
         <p className="saved__title">Saved articles</p>
         <h1 className="saved__heading">
-          {currentUser.name}, you have {savedArticlesData.length} saved articles
+          {currentUser.name}, you have {savedArticles.length} saved articles
         </h1>
         <p className="saved__keywords">
           By keywords:{' '}
