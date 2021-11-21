@@ -1,10 +1,11 @@
+import { API_KEY, PROXY_URL, NUM_ARTICLES } from './constants';
+
 const today = new Date();
 const weekAgo = new Date(
   today.getFullYear(),
   today.getMonth(),
   today.getDate() - 7
 );
-const apiKey = 'b02901b7a4fa48e8aec2fe30bb52e6a6';
 
 class NewsApi {
   constructor({ baseUrl, headers }) {
@@ -23,7 +24,7 @@ class NewsApi {
     return fetch(
       `${
         this._baseUrl
-      }?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&language=en&sortBy=relevancy&pageSize=100&apiKey=${apiKey}`
+      }?q=${keyword}&from=${weekAgo.toISOString()}&to=${today.toISOString()}&language=en&sortBy=relevancy&pageSize=${NUM_ARTICLES}&apiKey=${API_KEY}`
     )
       .then((res) => this._returnRes(res))
       .then((res) => res.articles);
@@ -31,7 +32,7 @@ class NewsApi {
 }
 
 const newsApi = new NewsApi({
-  baseUrl: 'https://nomoreparties.co/news/v2/everything',
+  baseUrl: PROXY_URL,
   headers: {
     'Content-Type': 'X-Api-Key',
   },

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../news-card/NewsCard';
+import { NUM_CARDS } from '../../utils/constants';
 
 function NewsCardList({
   onSavedArticlesPage,
@@ -36,8 +37,8 @@ function NewsCardList({
 
   // on each click, add 3 cards to the 'next' variable, increase 'next' value by 3
   function handleShowMoreCards() {
-    setDisplayedCards(cards.slice(0, next + 3));
-    setNext(next + 3);
+    setDisplayedCards(cards.slice(0, next + NUM_CARDS));
+    setNext(next + NUM_CARDS);
   }
 
   return onSavedArticlesPage ? (
