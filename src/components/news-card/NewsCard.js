@@ -3,6 +3,8 @@ import './NewsCard.css';
 
 function NewsCard({
   data,
+  cards,
+  displayedCards,
   onSavedArticlesPage,
   loggedIn,
   onSaveArticleClick,
@@ -11,18 +13,35 @@ function NewsCard({
   onSignInClick,
 }) {
   const [isSaved, setIsSaved] = useState(false);
+  
+  
+  // useEffect(() => {
+  //   displayedCards?.forEach((card) => {
+  //     savedArticlesData?.find((obj) => {
+  //       console.log('obj title: ' + obj.title);
+  //       console.log('card title: ' + card.title);
+  //     });
+  //   });
 
-  useEffect(() => {
-    if (savedArticlesData?.find((obj) => obj.title === data.title)) {
-      setIsSaved(true);
-    }
-  }, [data.title, savedArticlesData]);
+  //   const savedArticlesTitle = savedArticlesData.map((article) => article.title);
 
-  function handleSave() {
+  //   if (savedArticlesTitle)
+
+  //   const displayedArticlesTitle = displayedCards.map(
+  //     (article) => article.title);
+
+  //     console.log(savedArticlesTitle);
+  //     console.log(displayedArticlesTitle)
+  //     console.log(data);
+
+  //   console.log(displayedCards.find((article) => article.title === savedArticlesTitle));
+  // }, []);
+
+  function handleSave(data) {
     if (isSaved) {
-      onDeleteArticleClick();
+      onDeleteArticleClick(data);
     } else {
-      onSavedArticlesPage();
+      onSaveArticleClick(data);
     }
     setIsSaved(!isSaved);
   }
@@ -87,7 +106,6 @@ function NewsCard({
         }`}
         onClick={() => {
           onSaveArticleClick(data);
-          handleSave();
           !loggedIn && onSignInClick(); // if user is not logged in, open sign in ppopup on click
         }}
       ></button>

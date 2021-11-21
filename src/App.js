@@ -66,7 +66,7 @@ function App() {
     mainApi
       .getArticles(token)
       .then((res) => {
-        setDisplayedCards(res.articles);
+        // setDisplayedCards(res.articles);
         setSavedArticlesData(res.articles);
       })
       .catch((err) => console.log(err));
@@ -92,6 +92,10 @@ function App() {
     document.addEventListener('keydown', closeByEscape);
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
+
+  useEffect(() => {
+
+  })
 
   function handleRegisterSubmit(email, password, name) {
     auth
@@ -146,7 +150,6 @@ function App() {
       console.log('thats already saved!');
     }
   }
-
 
   // deletes article, removes from array
   function handleDeleteArticle(data) {
@@ -250,16 +253,19 @@ function App() {
                 savedArticlesData={savedArticlesData}
                 cards={cards}
                 onSaveArticleClick={handleSaveArticle}
+                onDeleteArticleClick={handleDeleteArticle}
                 displayedCards={displayedCards}
                 setDisplayedCards={setDisplayedCards}
                 onSignInClick={handleSignInClick}
               />
             )}
             {isLoading && <PreloaderAnimation />}
-            {!hasResults && !isLoading && isNewsCardListOpen && <NoResults hasError={hasError}/>}
+            {!hasResults && !isLoading && isNewsCardListOpen && (
+              <NoResults hasError={hasError} />
+            )}
             <About />
           </Route>
-          <ProtectedRoute path='/saved-articles' loggedIn={loggedIn}>
+          <ProtectedRoute path="/saved-articles" loggedIn={loggedIn}>
             <SavedNewsHeader
               currentUser={currentUser}
               savedArticlesData={savedArticlesData}

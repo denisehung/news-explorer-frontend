@@ -40,6 +40,8 @@ function NewsCardList({
     setNext(next + 3);
   }
 
+  console.log(displayedCards);
+  
   return onSavedArticlesPage ? (
     <section className="news-card-list news-card-list_saved-articles">
       <div className="news-card-list__container">
@@ -66,10 +68,13 @@ function NewsCardList({
           {displayedCards?.map((newscard, index) => (
             <li className="news-card-list__card" key={index}>
               <NewsCard
+                cards={cards}
                 data={newscard}
+                displayedCards={displayedCards}
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
                 onSaveArticleClick={onSaveArticleClick}
+                onDeleteArticleClick={onDeleteArticleClick}
                 savedArticlesData={savedArticlesData}
                 onSignInClick={onSignInClick}
               />
@@ -84,12 +89,6 @@ function NewsCardList({
             Show more
           </button>
         )}
-        <button
-          className="news-card-list__show-more-button"
-          onClick={handleShowMoreCards}
-        >
-          Show more
-        </button>
       </div>
     </section>
   );
