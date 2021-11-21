@@ -149,19 +149,30 @@ function App() {
 
   // deletes article, removes from array
   function handleDeleteArticle(data) {
-    const articleId = data._id;
-    if (savedArticles.find((obj) => obj._id === articleId)) {
-      mainApi
-        .deleteArticle(articleId, token)
-        .then((data) => {
-          setSavedArticles(
-            savedArticles.filter((obj) => obj._id !== data.article._id)
-          );
-        })
-        .catch((err) => console.log(err));
+    let articleId;
+
+    // if on saved articles page, find the corresponding saved article that matches the news API article, and save its ID to articleId. if not on that page, simply save the data ID to articleID.
+    if (!onSavedArticlesPage) {
+      if (savedArticles.find((obj) => obj.link === data.url)) {
+        const article = savedArticles.find((obj) => {
+          return obj.link === data.url;
+        });
+        articleId = article._id;
+      } else {
+        console.log('that card doesnt exist!');
+      }
     } else {
-      console.log('that card doesnt exist!');
+      articleId = data._id;
     }
+
+    mainApi
+      .deleteArticle(articleId, token)
+      .then((data) => {
+        setSavedArticles(
+          savedArticles.filter((obj) => obj._id !== data.article._id)
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleSearchSubmit(keyword) {
@@ -250,8 +261,8 @@ function App() {
               <NewsCardList
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                savedArticles={savedArticles}
                 cards={cards}
+                savedArticles={savedArticles}
                 onSaveArticleClick={handleSaveArticle}
                 onDeleteArticleClick={handleDeleteArticle}
                 displayedCards={displayedCards}

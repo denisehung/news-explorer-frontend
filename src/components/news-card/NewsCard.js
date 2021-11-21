@@ -4,7 +4,6 @@ import './NewsCard.css';
 function NewsCard({
   data, // data for individual NewsCard
   onSavedArticlesPage,
-  displayedCards,
   loggedIn,
   onSaveArticleClick,
   onDeleteArticleClick,
@@ -15,20 +14,19 @@ function NewsCard({
 
   useEffect(() => {
     const savedArticlesTitles = savedArticles.map((article) => article.title);
-    if (
-      savedArticlesTitles.includes(data.title)
-    ) {
+    if (savedArticlesTitles.includes(data.title)) {
       setIsSaved(true);
     }
   }, [data.title, onSavedArticlesPage, savedArticles]);
 
-  // function handleSave(data) {
-  //   if (isSaved) {
-  //     onDeleteArticleClick(data);
-  //   } else {
-  //     onSaveArticleClick(data);
-  //   }
-  // }
+  function handleSave(data) {
+    if (isSaved) {
+      onDeleteArticleClick(data);
+    } else {
+      onSaveArticleClick(data);
+    }
+    setIsSaved(!isSaved);
+  }
 
   function convertDate() {
     const months = [
@@ -89,8 +87,7 @@ function NewsCard({
           loggedIn && isSaved ? 'news-card__button_save_active' : ''
         }`}
         onClick={() => {
-          onSaveArticleClick(data);
-          setIsSaved(true);
+          handleSave(data);
           !loggedIn && onSignInClick(); // if user is not logged in, open sign in ppopup on click
         }}
       ></button>
