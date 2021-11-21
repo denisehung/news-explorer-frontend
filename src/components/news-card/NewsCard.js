@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './NewsCard.css';
 
 function NewsCard({
-  data,
-  cards,
-  displayedCards,
+  data, // data for individual NewsCard
   onSavedArticlesPage,
   loggedIn,
   onSaveArticleClick,
@@ -13,28 +11,20 @@ function NewsCard({
   onSignInClick,
 }) {
   const [isSaved, setIsSaved] = useState(false);
-  
-  // useEffect(() => {
-  //   displayedCards?.forEach((card) => {
-  //     savedArticlesData?.find((obj) => {
-  //       console.log('obj title: ' + obj.title);
-  //       console.log('card title: ' + card.title);
-  //     });
-  //   });
 
-  //   const savedArticlesTitle = savedArticlesData.map((article) => article.title);
+  useEffect(() => {
 
-  //   if (savedArticlesTitle)
+    const savedArticlesTitles = savedArticlesData?.map(
+      (article) => article.title
+    );
 
-  //   const displayedArticlesTitle = displayedCards.map(
-  //     (article) => article.title);
+    if (savedArticlesTitles.includes(data.title)) {
+      setIsSaved(true);
+    }
 
-  //     console.log(savedArticlesTitle);
-  //     console.log(displayedArticlesTitle)
-  //     console.log(data);
-
-  //   console.log(displayedCards.find((article) => article.title === savedArticlesTitle));
-  // }, []);
+    console.log(savedArticlesTitles);
+    console.log(data.title);
+  }, []);
 
   // function handleSave(data) {
   //   if (isSaved) {
