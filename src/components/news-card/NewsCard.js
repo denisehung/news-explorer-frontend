@@ -14,7 +14,6 @@ function NewsCard({
 }) {
   const [isSaved, setIsSaved] = useState(false);
   
-  
   // useEffect(() => {
   //   displayedCards?.forEach((card) => {
   //     savedArticlesData?.find((obj) => {
@@ -37,14 +36,13 @@ function NewsCard({
   //   console.log(displayedCards.find((article) => article.title === savedArticlesTitle));
   // }, []);
 
-  function handleSave(data) {
-    if (isSaved) {
-      onDeleteArticleClick(data);
-    } else {
-      onSaveArticleClick(data);
-    }
-    setIsSaved(!isSaved);
-  }
+  // function handleSave(data) {
+  //   if (isSaved) {
+  //     onDeleteArticleClick(data);
+  //   } else {
+  //     onSaveArticleClick(data);
+  //   }
+  // }
 
   function convertDate() {
     const months = [
@@ -106,6 +104,7 @@ function NewsCard({
         }`}
         onClick={() => {
           onSaveArticleClick(data);
+          setIsSaved(true);
           !loggedIn && onSignInClick(); // if user is not logged in, open sign in ppopup on click
         }}
       ></button>

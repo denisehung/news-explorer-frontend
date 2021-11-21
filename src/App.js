@@ -66,7 +66,7 @@ function App() {
     mainApi
       .getArticles(token)
       .then((res) => {
-        // setDisplayedCards(res.articles);
+        setDisplayedCards(res.articles);
         setSavedArticlesData(res.articles);
       })
       .catch((err) => console.log(err));
@@ -92,10 +92,6 @@ function App() {
     document.addEventListener('keydown', closeByEscape);
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
-
-  useEffect(() => {
-
-  })
 
   function handleRegisterSubmit(email, password, name) {
     auth
