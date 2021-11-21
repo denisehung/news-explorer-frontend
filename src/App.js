@@ -151,7 +151,7 @@ function App() {
   function handleDeleteArticle(data) {
     let articleId;
 
-    // if on saved articles page, find the corresponding saved article that matches the news API article, and save its ID to articleId. if not on that page, simply save the data ID to articleID.
+    // if on homepage, find the corresponding saved article that matches the news API article, and save its ID to articleId. if on saved articles page, simply save the data ID to articleID.
     if (!onSavedArticlesPage) {
       if (savedArticles.find((obj) => obj.link === data.url)) {
         const article = savedArticles.find((obj) => {

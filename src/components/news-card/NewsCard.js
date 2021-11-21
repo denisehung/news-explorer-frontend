@@ -12,12 +12,13 @@ function NewsCard({
 }) {
   const [isSaved, setIsSaved] = useState(false);
 
+  // Check if searched cards are saved by checking if titles are matching
+  // If there's a match, the state becomes isSaved, which turns bookmark icon blue
   useEffect(() => {
-    const savedArticlesTitles = savedArticles.map((article) => article.title);
-    if (savedArticlesTitles.includes(data.title)) {
-      setIsSaved(true);
+    if (savedArticles) {
+      setIsSaved(savedArticles.find((article) => article.title === data.title));
     }
-  }, [data.title, onSavedArticlesPage, savedArticles]);
+  }, [data.title, savedArticles]);
 
   function handleSave(data) {
     if (isSaved) {
