@@ -4,7 +4,7 @@ const weekAgo = new Date(
   today.getMonth(),
   today.getDate() - 7
 );
-const apiKey = '89646cd537e44c1685691caa70a539b4';
+const apiKey = 'b02901b7a4fa48e8aec2fe30bb52e6a6';
 
 class NewsApi {
   constructor({ baseUrl, headers }) {
