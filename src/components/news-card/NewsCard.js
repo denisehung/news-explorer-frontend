@@ -4,27 +4,24 @@ import './NewsCard.css';
 function NewsCard({
   data, // data for individual NewsCard
   onSavedArticlesPage,
+  displayedCards,
   loggedIn,
   onSaveArticleClick,
   onDeleteArticleClick,
-  savedArticlesData,
+  savedArticles,
   onSignInClick,
 }) {
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
+    const savedArticlesTitles = savedArticles.map((article) => article.title);
 
-    const savedArticlesTitles = savedArticlesData?.map(
-      (article) => article.title
-    );
-
-    if (savedArticlesTitles.includes(data.title)) {
+    if (
+      savedArticlesTitles.includes(data.title)
+    ) {
       setIsSaved(true);
     }
-
-    console.log(savedArticlesTitles);
-    console.log(data.title);
-  }, []);
+  }, [data.title, onSavedArticlesPage, savedArticles]);
 
   // function handleSave(data) {
   //   if (isSaved) {

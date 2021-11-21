@@ -35,9 +35,9 @@ function App() {
   const [hasResults, setHasResults] = useState(false);
   const location = useLocation().pathname.substring(1);
   const [hasError, setHasError] = useState(false);
-  const [savedArticlesData, setSavedArticlesData] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
   const [displayedCards, setDisplayedCards] = useState([]);
-  
+
   // Check user token
   useEffect(() => {
     if (token) {
@@ -67,7 +67,7 @@ function App() {
       .getArticles(token)
       .then((res) => {
         // setDisplayedCards(res.articles);
-        setSavedArticlesData(res.articles);
+        setSavedArticles(res.articles);
       })
       .catch((err) => console.log(err));
   }, [token]);
@@ -129,12 +129,12 @@ function App() {
 
   // saves article, adds to array of articles
   function handleSaveArticle(data) {
-    if (!savedArticlesData.find((obj) => obj.title === data.title)) {
+    if (!savedArticles.find((obj) => obj.title === data.title)) {
       mainApi
         .saveArticle(data, searchKeyword, token)
         .then((data) => {
           if (data) {
-            setSavedArticlesData((savedArticles) => [
+            setSavedArticles((savedArticles) => [
               ...savedArticles,
               data.article,
             ]);
@@ -150,11 +150,13 @@ function App() {
   // deletes article, removes from array
   function handleDeleteArticle(data) {
     const articleId = data._id;
-    if (savedArticlesData.find((obj) => obj._id === articleId)) {
+    if (savedArticles.find((obj) => obj._id === articleId)) {
       mainApi
         .deleteArticle(articleId, token)
         .then((data) => {
-          setSavedArticlesData(savedArticlesData.filter((obj) => obj._id !== data.article._id));
+          setSavedArticles(
+            savedArticles.filter((obj) => obj._id !== data.article._id)
+          );
         })
         .catch((err) => console.log(err));
     } else {
@@ -246,7 +248,7 @@ function App() {
               <NewsCardList
                 onSavedArticlesPage={onSavedArticlesPage}
                 loggedIn={loggedIn}
-                savedArticlesData={savedArticlesData}
+                savedArticles={savedArticles}
                 cards={cards}
                 onSaveArticleClick={handleSaveArticle}
                 onDeleteArticleClick={handleDeleteArticle}
@@ -264,13 +266,13 @@ function App() {
           <ProtectedRoute path="/saved-articles" loggedIn={loggedIn}>
             <SavedNewsHeader
               currentUser={currentUser}
-              savedArticlesData={savedArticlesData}
+              savedArticles={savedArticles}
             />
             <NewsCardList
               onSavedArticlesPage={onSavedArticlesPage}
               loggedIn={loggedIn}
-              savedArticlesData={savedArticlesData}
-              setSavedArticlesData={setSavedArticlesData}
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
               token={token}
               displayedCards={displayedCards}
               setDisplayedCards={setDisplayedCards}
