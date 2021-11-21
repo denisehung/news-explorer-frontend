@@ -1,7 +1,4 @@
-export const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://api.aloha.students.nomoreparties.site'
-    : 'http://localhost:3000';
+import { BASE_URL } from './constants';
 
 function returnRes(res) {
   if (res.ok) {

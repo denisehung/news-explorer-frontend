@@ -1,3 +1,5 @@
+import { BASE_URL } from './constants';
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -85,10 +87,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl:
-    process.env.NODE_ENV === 'production'
-      ? 'https://api.aloha.students.nomoreparties.site'
-      : 'http://localhost:3000',
+  baseUrl: BASE_URL
 });
 
 export default api;

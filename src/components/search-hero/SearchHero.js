@@ -4,7 +4,6 @@ import './SearchHero.css';
 function SearchHero({
   searchKeyword,
   setSearchKeyword,
-  setIsNewsCardListOpen,
   onSearch,
 }) {
   const [formInputValue, setFormInputValue] = useState('');

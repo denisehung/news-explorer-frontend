@@ -10,6 +10,7 @@ function NewsCard({
   savedArticles,
   onSignInClick,
 }) {
+  
   const [isSaved, setIsSaved] = useState(false);
 
   // Check if searched cards are saved by checking if titles are matching
@@ -89,7 +90,7 @@ function NewsCard({
         }`}
         onClick={() => {
           handleSave(data);
-          !loggedIn && onSignInClick(); // if user is not logged in, open sign in ppopup on click
+          !loggedIn && onSignInClick(); // if user is not logged in, open sign in popup on click
         }}
       ></button>
       {!loggedIn && (
