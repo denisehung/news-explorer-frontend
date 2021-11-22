@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import './App.css';
-import Header from './components/header/Header';
-import SearchHero from './components/search-hero/SearchHero';
-import About from './components/about/About';
-import Footer from './components/footer/Footer';
-import SignIn from './components/sign-in/SignIn';
-import SignUp from './components/sign-up/SignUp';
-import NewsCardList from './components/news-card-list/NewsCardList';
-import SavedNewsHeader from './components/saved-news-header/SavedNewsHeader';
-import PreloaderAnimation from './components/preloader-animation/PreloaderAnimation';
-import NoResults from './components/no-results/NoResults';
-import ProtectedRoute from './components/protected-route/ProtectedRoute';
-import SuccessPopup from './components/success-popup/SuccessPopup';
-import CurrentUserContext from './contexts/CurrentUserContext';
-import mainApi from './utils/mainApi';
-import newsApi from './utils/newsApi';
-import * as auth from './utils/auth';
+import Header from '../header/Header';
+import SearchHero from '../search-hero/SearchHero';
+import About from '../about/About';
+import Footer from '../footer/Footer';
+import SignIn from '../sign-in/SignIn';
+import SignUp from '../sign-up/SignUp';
+import NewsCardList from '../news-card-list/NewsCardList';
+import SavedNewsHeader from '../saved-news-header/SavedNewsHeader';
+import PreloaderAnimation from '../preloader-animation/PreloaderAnimation';
+import NoResults from '../no-results/NoResults';
+import ProtectedRoute from '../protected-route/ProtectedRoute';
+import SuccessPopup from '../success-popup/SuccessPopup';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import mainApi from '../../utils/mainApi';
+import newsApi from '../../utils/newsApi';
+import * as auth from '../../utils/auth';
 
 function App() {
   const history = useHistory();
@@ -107,7 +107,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`This email is unavailable: ${err.message}`);
       });
   }
 
@@ -123,7 +123,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Incorrect email or password: ${err.message}`);
         setHasError(true);
       });
   }

@@ -67,6 +67,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  padding: 12px;
 }
 
 .header__log-button_logged-in {

@@ -1,5 +1,5 @@
 import React from 'react';
-import './PopupWithForm.css';
+import './Popup.css';
 
 function PopupWithForm(props) {
   function handlePopupClick(e) {
@@ -24,14 +24,7 @@ function PopupWithForm(props) {
         ></button>
         <div className="popup__form-container">
           <h2 className="popup__title">{props.title}</h2>
-          <form
-            className={`popup__form popup__form_type_${props.name}`}
-            name={`form-${props.name}`}
-            onSubmit={props.onSubmit}
-            noValidate
-          >
             {props.children}
-          </form>
         </div>
       </div>
     </div>
