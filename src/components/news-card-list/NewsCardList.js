@@ -12,6 +12,8 @@ function NewsCardList({
   setDisplayedCards,
   onSaveArticleClick,
   onDeleteArticleClick,
+  savedCardsArray,
+  setSavedCardsArray,
   onSignInClick,
 }) {
   const [next, setNext] = useState(3);
@@ -21,10 +23,14 @@ function NewsCardList({
   useEffect(() => {
     if (!onSavedArticlesPage) {
       setDisplayedCards(cards?.slice(0, 3));
-    } else {
-      setDisplayedCards(savedArticles);
     }
-  }, [cards, onSavedArticlesPage, savedArticles, setDisplayedCards]);
+  }, [cards, onSavedArticlesPage, setDisplayedCards]);
+
+  useEffect(() => {
+    if (onSavedArticlesPage) {
+      setSavedCardsArray(savedArticles);
+    }
+  },[onSavedArticlesPage, savedArticles, setSavedCardsArray])
 
   // only display 'show more button' while number of displayed cards is smaller than total cards
   useEffect(() => {
@@ -45,7 +51,7 @@ function NewsCardList({
     <section className="news-card-list news-card-list_saved-articles">
       <div className="news-card-list__container">
         <ul className="news-card-list__card-grid news-card-list__card-grid_saved-articles">
-          {displayedCards?.map((newscard) => (
+          {savedCardsArray?.map((newscard) => (
             <li className="news-card-list__card" key={newscard._id}>
               <NewsCard
                 data={newscard}
