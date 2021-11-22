@@ -1,9 +1,9 @@
 import React from 'react';
-import PopupWithForm from '../popup-with-form/PopupWithForm';
+import Popup from '../popup/Popup';
 
 function SuccessPopup(props) {
   return (
-    <PopupWithForm
+    <Popup
       name="success"
       title="Registration successfully completed!"
       isOpen={props.isOpen}
@@ -13,7 +13,7 @@ function SuccessPopup(props) {
       <p className="popup__signin-link" onClick={props.onSignInClick}>
         Sign in
       </p>
-    </PopupWithForm>
+    </Popup>
   );
 }
 
