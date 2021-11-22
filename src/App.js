@@ -37,6 +37,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [savedArticles, setSavedArticles] = useState([]);
   const [displayedCards, setDisplayedCards] = useState([]);
+  const [savedCardsArray, setSavedCardsArray] = useState([]);
 
   // Check user token
   useEffect(() => {
@@ -289,6 +290,8 @@ function App() {
               token={token}
               displayedCards={displayedCards}
               setDisplayedCards={setDisplayedCards}
+              savedCardsArray={savedCardsArray}
+              setSavedCardsArray={setSavedCardsArray}
               onDeleteArticleClick={handleDeleteArticle}
             />
           </ProtectedRoute>
