@@ -108,6 +108,7 @@ function App() {
       })
       .catch((err) => {
         console.log(`This email is unavailable: ${err.message}`);
+        setHasError(true);
       });
   }
 
