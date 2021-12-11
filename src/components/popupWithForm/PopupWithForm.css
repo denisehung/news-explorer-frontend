@@ -59,13 +59,13 @@
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   line-height: 14.52px;
-  color: #2F71E5;
+  color: #2f71e5;
 }
 
 .popup__input {
-  box-sizing:border-box;
+  box-sizing: border-box;
   width: 100%;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 16.94px;
   display: block;
@@ -89,14 +89,18 @@
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   line-height: 15px;
-  color: #FF0000;
+  color: #ff0000;
   margin: 0;
   position: relative;
-  bottom: -5px;
+}
+
+.popup__error_type_form {
+  text-align: center;
+  top: -15px;
 }
 
 .popup__submit-button {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
   line-height: 24px;
   width: 100%;
@@ -108,22 +112,22 @@
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: #E6E8EB;
-  color: #B6BCBF;
+  background-color: #e6e8eb;
+  color: #b6bcbf;
 }
 
-.popup__submit-button_active { 
+.popup__submit-button_active {
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
-  background-color: #2F71E5;
+  background-color: #2f71e5;
   color: white;
 }
 
 .popup__submit-button_active:hover {
-  background-color: #347EFF;
+  background-color: #347eff;
 }
 
 .popup__submit-button_active:focus {
-  background-color: #2A65CC;
+  background-color: #2a65cc;
 }
 
 .popup__submit-button:hover {
@@ -131,8 +135,8 @@
 }
 
 .popup__submit-button_inactive {
-  background-color: #D1D2D6;
-  color: #B6BCBF;
+  background-color: #d1d2d6;
+  color: #b6bcbf;
 }
 
 .popup__signin-signup {
@@ -141,17 +145,17 @@
   font-size: 14px;
   line-height: 16.94px;
   margin-top: 16px;
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .popup__link {
-  color: #2F71E5;
+  color: #2f71e5;
   cursor: pointer;
 }
 
 .popup__signin-link {
   font-family: 'Inter', sans-serif;
-  color: #2F71E5;
+  color: #2f71e5;
   cursor: pointer;
 }
 
