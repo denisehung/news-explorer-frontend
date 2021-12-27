@@ -9,12 +9,11 @@ function About() {
       <div className="about__description">
         <h2 className="about__header">About the authors</h2>
         <p className="about__paragraph">
-          This block describes the project author. Here you should indicate your
-          name, what you do, and which development technologies you know.
+          Colin and Denise completed this project as students in Practicum's Web Developer program. They are two regular people, and are best friends in real life.
         </p>
         <p className="about__paragraph">
-          You can also talk about your experience with Practicum, what you
-          learned there, and how you can help potential customers.
+          In her free time, Denise buys turtles from the pet store and sets them free.
+          Colin earns extra money by catching local turtles and selling them to the pet store.
         </p>
       </div>
     </section>
