@@ -1,12 +1,11 @@
 import React from 'react';
 import './About.css';
-import AuthorImage from '../../images/author-image.jpg';
-import DeniseNColin from '../../images/colin-denise-authors.png';
+import AuthorImage from '../../images/denise-colin-authors.png';
 
 function About() {
   return (
     <section className="about">
-      <img src={DeniseNColin} alt="avatar" className="about__image" />
+      <img src={AuthorImage} alt="avatar" className="about__image" />
       <div className="about__description">
         <h2 className="about__header">About the authors</h2>
         <p className="about__paragraph">
