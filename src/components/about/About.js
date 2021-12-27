@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css';
-import AuthorImage from '../../images/author-image.jpg';
+import AuthorImage from '../../images/denise-colin-authors.png';
 
 function About() {
   return (
