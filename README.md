@@ -7,6 +7,7 @@
 - Back-end is hosted on Google Cloud and data is stored on and retrieved from MongoDB.
 - Site features include centralized error handling, authorization middleware, and environment variables.
 - Connected to the external [**News API**](https://newsapi.org/) to get news articles on search.
+- [**Link to back-end repository**](https://github.com/denisehung/news-explorer-api)
 
 ---
 
