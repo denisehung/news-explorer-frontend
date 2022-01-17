@@ -1,4 +1,4 @@
-# 📰News Explorer Back End📰
+# 📰News Explorer Front End📰
 
 ## Project Description / Functionality: 
 - This part of the project serves as the front-end for News Explorer and is connected to an API handling requests and data storage. 
