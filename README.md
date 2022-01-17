@@ -1,16 +1,18 @@
 # News Explorer Front End
 
 ## Project Description / Functionality: 
-- This part of the project serves as the front-end for News Explorer and is connected to an API handling requests and data storage. 
+- This part of the project serves as the front-end for News Explorer, a website where users can search and save news articles.
+- Connected to a self-built API handling requests and data storage. 
 - The controllers handle user creation, login, and getting user data, as well as saving, getting, and deleting articles based on user actions.
 - Back-end is hosted on Google Cloud and data is stored on and retrieved from MongoDB.
 - Site features include centralized error handling, authorization middleware, and environment variables.
+- Connected to the external [**News API**](https://newsapi.org/) to get news articles on search.
 
 ---
 
 ## Project Technologies/Techniques:
 - React
-- MongoDB/Mongoose
+- MongoDB
 - Express
 - Google Cloud
 - Celebrate
